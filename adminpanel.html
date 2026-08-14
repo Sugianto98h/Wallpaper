@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wallpaper Admin Panel</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -17,15 +16,138 @@
             background: #0b0f1a;
             color: #eef4ff;
             min-height: 100vh;
-            padding: 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
 
-        .container {
+        /* ===== LOGIN PAGE ===== */
+        .login-container {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 2rem;
+            padding: 3rem 2.5rem;
+            max-width: 420px;
+            width: 100%;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-container h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #7abfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-container .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-container .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .login-container .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.4rem;
+        }
+
+        .login-container .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #eef4ff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .login-container .form-group input:focus {
+            border-color: rgba(70, 150, 255, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .login-container .btn {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: rgba(70, 150, 255, 0.25);
+            border: 1px solid rgba(70, 150, 255, 0.3);
+            color: #eef4ff;
+        }
+
+        .login-container .btn:hover {
+            background: rgba(70, 150, 255, 0.4);
+            border-color: rgba(70, 150, 255, 0.6);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 80, 200, 0.3);
+        }
+
+        .login-container .error {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .login-container .error.show {
+            display: block;
+        }
+
+        .login-container .footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.7rem;
+        }
+
+        /* ===== ADMIN PANEL ===== */
+        .admin-panel {
+            display: none;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* ===== HEADER ===== */
+        .admin-panel.active {
+            display: block;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -50,6 +172,7 @@
             display: flex;
             gap: 1rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .header-actions .stats {
@@ -108,13 +231,23 @@
             transform: scale(1.02);
         }
 
+        .btn-logout {
+            background: rgba(255, 70, 70, 0.1);
+            border-color: rgba(255, 70, 70, 0.15);
+            color: #ff6b6b;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 70, 70, 0.2);
+            border-color: rgba(255, 70, 70, 0.3);
+        }
+
         .btn svg {
             width: 18px;
             height: 18px;
             fill: currentColor;
         }
 
-        /* ===== UPLOAD FORM ===== */
         .upload-area {
             background: rgba(255, 255, 255, 0.03);
             border: 2px dashed rgba(255, 255, 255, 0.08);
@@ -202,7 +335,6 @@
             margin-top: 0.5rem;
         }
 
-        /* ===== GALLERY GRID (ADMIN) ===== */
         .gallery-header {
             display: flex;
             justify-content: space-between;
@@ -226,7 +358,6 @@
             gap: 1.5rem;
         }
 
-        /* ===== WALLPAPER CARD (ADMIN) ===== */
         .wallpaper-card {
             background: rgba(255, 255, 255, 0.04);
             border-radius: 1.2rem;
@@ -283,18 +414,11 @@
             font-size: 0.8rem;
         }
 
-        /* ===== EMPTY STATE ===== */
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
             color: rgba(255, 255, 255, 0.3);
-        }
-
-        .empty-state svg {
-            width: 64px;
-            height: 64px;
-            fill: rgba(255, 255, 255, 0.1);
-            margin-bottom: 1rem;
+            grid-column: 1 / -1;
         }
 
         .empty-state h3 {
@@ -302,7 +426,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -335,7 +458,23 @@
             border-color: rgba(255, 70, 70, 0.3);
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ===== CHANGE PASSWORD ===== */
+        .change-password {
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        .change-password a {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .change-password a:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
         @media (max-width: 768px) {
             .upload-form {
                 grid-template-columns: 1fr;
@@ -361,77 +500,201 @@
                 border-radius: 1rem;
                 text-align: center;
             }
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-
-        <!-- ===== HEADER ===== -->
-        <header class="header">
-            <h1>Wallpaper Admin Panel</h1>
-            <div class="header-actions">
-                <span class="stats" id="stats">0 wallpapers</span>
-                <button class="btn btn-danger" onclick="clearAllWallpapers()">
-                    <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-                    Clear All
-                </button>
-                <button class="btn btn-success" onclick="exportData()">
-                    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                    Export JSON
-                </button>
+    <!-- ===== LOGIN PAGE ===== -->
+    <div class="login-container" id="loginPage">
+        <h1>Admin Panel</h1>
+        <p class="subtitle">Enter password to access</p>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter admin password" autofocus>
             </div>
-        </header>
+            <button type="submit" class="btn">Login</button>
+            <div class="error" id="loginError">Incorrect password. Please try again.</div>
+            <div class="footer">Default password: <strong>didi123</strong></div>
+        </form>
+    </div>
 
-        <!-- ===== UPLOAD FORM ===== -->
-        <div class="upload-area" id="uploadArea">
-            <form class="upload-form" id="uploadForm">
-                <div class="form-group full-width">
-                    <label>Upload Image</label>
-                    <input type="file" id="imageFile" accept="image/*" required>
-                </div>
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" id="imageTitle" placeholder="e.g., Golden Sunset" required>
-                </div>
-                <div class="form-group">
-                    <label>Category</label>
-                    <select id="imageCategory">
-                        <option value="Nature">Nature</option>
-                        <option value="Urban">Urban</option>
-                        <option value="Astro">Astro</option>
-                        <option value="Abstract">Abstract</option>
-                        <option value="Minimal">Minimal</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn" onclick="resetForm()">Reset</button>
-                    <button type="submit" class="btn btn-primary" id="uploadBtn">
-                        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                        Upload Wallpaper
+    <!-- ===== ADMIN PANEL ===== -->
+    <div class="admin-panel" id="adminPanel">
+        <div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+            <a href="index.html" class="back-btn">← Back to Home</a>
+
+            <header class="header">
+                <h1>Wallpaper Admin Panel</h1>
+                <div class="header-actions">
+                    <span class="stats" id="stats">0 wallpapers</span>
+                    <button class="btn btn-logout" onclick="logout()">
+                        <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+                        Logout
+                    </button>
+                    <button class="btn btn-danger" onclick="clearAllWallpapers()">
+                        <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                        Clear All
+                    </button>
+                    <button class="btn btn-success" onclick="exportData()">
+                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Export JSON
                     </button>
                 </div>
-            </form>
-        </div>
+            </header>
 
-        <!-- ===== GALLERY ===== -->
-        <div class="gallery-header">
-            <h2>Wallpaper Collection</h2>
-            <span class="count" id="wallpaperCount">0 items</span>
-        </div>
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- Rendered by JavaScript -->
+            <!-- Change Password -->
+            <div class="change-password">
+                <a onclick="changePassword()">Change Password</a>
+            </div>
+
+            <div class="upload-area" id="uploadArea">
+                <form class="upload-form" id="uploadForm">
+                    <div class="form-group full-width">
+                        <label>Upload Image</label>
+                        <input type="file" id="imageFile" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="imageTitle" placeholder="e.g., Golden Sunset" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="imageCategory">
+                            <option value="Nature">Nature</option>
+                            <option value="Urban">Urban</option>
+                            <option value="Astro">Astro</option>
+                            <option value="Abstract">Abstract</option>
+                            <option value="Minimal">Minimal</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn" onclick="resetForm()">Reset</button>
+                        <button type="submit" class="btn btn-primary" id="uploadBtn">
+                            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                            Upload Wallpaper
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="gallery-header">
+                <h2>Wallpaper Collection</h2>
+                <span class="count" id="wallpaperCount">0 items</span>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
         </div>
     </div>
 
-    <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"></div>
 
     <script>
         // ============================================================
-        // DATA STORAGE (LocalStorage)
+        // PASSWORD SYSTEM
+        // ============================================================
+        const PASSWORD_KEY = 'admin_password';
+        const SESSION_KEY = 'admin_logged_in';
+        const DEFAULT_PASSWORD = 'admin123';
+
+        // Initialize password if not exists
+        if (!localStorage.getItem(PASSWORD_KEY)) {
+            localStorage.setItem(PASSWORD_KEY, DEFAULT_PASSWORD);
+        }
+
+        function getStoredPassword() {
+            return localStorage.getItem(PASSWORD_KEY) || DEFAULT_PASSWORD;
+        }
+
+        function checkSession() {
+            return localStorage.getItem(SESSION_KEY) === 'true';
+        }
+
+        function setSession(loggedIn) {
+            localStorage.setItem(SESSION_KEY, loggedIn ? 'true' : 'false');
+        }
+
+        // ============================================================
+        // LOGIN / LOGOUT
+        // ============================================================
+        const loginPage = document.getElementById('loginPage');
+        const adminPanel = document.getElementById('adminPanel');
+        const loginForm = document.getElementById('loginForm');
+        const passwordInput = document.getElementById('passwordInput');
+        const loginError = document.getElementById('loginError');
+
+        function showLogin() {
+            loginPage.style.display = 'block';
+            adminPanel.classList.remove('active');
+            passwordInput.value = '';
+            loginError.classList.remove('show');
+        }
+
+        function showAdmin() {
+            loginPage.style.display = 'none';
+            adminPanel.classList.add('active');
+            renderGallery();
+        }
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const entered = passwordInput.value;
+            const stored = getStoredPassword();
+
+            if (entered === stored) {
+                setSession(true);
+                showAdmin();
+                showToast('Login successful!', 'success');
+            } else {
+                loginError.classList.add('show');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+
+        function logout() {
+            setSession(false);
+            showLogin();
+            showToast('Logged out', 'info');
+        }
+
+        // ============================================================
+        // CHANGE PASSWORD
+        // ============================================================
+        function changePassword() {
+            const current = prompt('Enter current password:');
+            if (current === null) return;
+
+            const stored = getStoredPassword();
+            if (current !== stored) {
+                showToast('Incorrect current password', 'error');
+                return;
+            }
+
+            const newPass = prompt('Enter new password (min 4 characters):');
+            if (newPass === null) return;
+            if (newPass.length < 4) {
+                showToast('Password must be at least 4 characters', 'error');
+                return;
+            }
+
+            const confirmPass = prompt('Confirm new password:');
+            if (confirmPass === null) return;
+            if (newPass !== confirmPass) {
+                showToast('Passwords do not match', 'error');
+                return;
+            }
+
+            localStorage.setItem(PASSWORD_KEY, newPass);
+            showToast('Password changed successfully!', 'success');
+        }
+
+        // ============================================================
+        // DATA STORAGE
         // ============================================================
         const STORAGE_KEY = 'wallpaper_data';
 
@@ -470,8 +733,7 @@
         function renderGallery() {
             if (wallpapers.length === 0) {
                 galleryGrid.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
-                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4-3h2v13h-2z"/></svg>
+                    <div class="empty-state">
                         <h3>No wallpapers yet</h3>
                         <p>Upload your first wallpaper using the form above</p>
                     </div>
@@ -500,14 +762,13 @@
                 `).join('');
             }
 
-            // Update stats
             const count = wallpapers.length;
             stats.textContent = `${count} wallpapers`;
             wallpaperCount.textContent = `${count} items`;
         }
 
         // ============================================================
-        // UPLOAD WALLPAPER (with image to Base64)
+        // UPLOAD WALLPAPER
         // ============================================================
         uploadForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -526,7 +787,6 @@
 
             const category = imageCategory.value;
 
-            // Convert image to Base64
             const reader = new FileReader();
             reader.onload = function(event) {
                 const base64 = event.target.result;
@@ -536,7 +796,7 @@
                     title: title,
                     category: category,
                     image: base64,
-                    download: base64 // same image for download
+                    download: base64
                 };
 
                 wallpapers.push(newWallpaper);
@@ -566,14 +826,14 @@
         }
 
         // ============================================================
-        // EDIT WALLPAPER (quick edit: just title and category)
+        // EDIT WALLPAPER
         // ============================================================
         function editWallpaper(id) {
             const wp = wallpapers.find(w => w.id === id);
             if (!wp) return;
 
             const newTitle = prompt('Edit title:', wp.title);
-            if (newTitle === null) return; // cancelled
+            if (newTitle === null) return;
 
             const newCategory = prompt('Edit category:', wp.category);
             if (newCategory === null) return;
@@ -582,7 +842,7 @@
             wp.category = newCategory.trim() || wp.category;
             saveWallpapers(wallpapers);
             renderGallery();
-            showToast(`Wallpaper updated!`, 'success');
+            showToast('Wallpaper updated!', 'success');
         }
 
         // ============================================================
@@ -633,7 +893,7 @@
         }
 
         // ============================================================
-        // DRAG AND DROP SUPPORT
+        // DRAG AND DROP
         // ============================================================
         uploadArea.addEventListener('dragover', function(e) {
             e.preventDefault();
@@ -651,8 +911,7 @@
             const files = e.dataTransfer.files;
             if (files.length > 0) {
                 imageFile.files = files;
-                // Auto-fill title from filename
-                const fileName = files[0].name.replace(/\.[^/.]+$/, ''); // remove extension
+                const fileName = files[0].name.replace(/\.[^/.]+$/, '');
                 imageTitle.value = fileName.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
             }
         });
@@ -665,7 +924,6 @@
         function showToast(message, type = 'info') {
             toast.textContent = message;
             toast.className = 'toast ' + type;
-            // Force reflow
             void toast.offsetWidth;
             toast.classList.add('show');
             clearTimeout(toastTimeout);
@@ -677,25 +935,34 @@
         // ============================================================
         // INIT
         // ============================================================
-        renderGallery();
+        // Check session on load
+        if (checkSession()) {
+            showAdmin();
+        } else {
+            showLogin();
+        }
+
+        // Enter key on password field
+        passwordInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                loginForm.dispatchEvent(new Event('submit'));
+            }
+        });
 
         // ============================================================
         // NOTES:
         // ============================================================
         /*
-        This admin panel uses localStorage to store wallpapers as Base64 data.
         
-        To make it production-ready:
-        1. Replace localStorage with a backend API (Node.js, PHP, etc.)
-        2. Store images on a server/filesystem instead of Base64
-        3. Add user authentication
         
-        For the gallery page (public view), you would:
-        1. Fetch wallpapers from your backend API
-        2. Display them in a similar grid
-        3. Use the same image URLs served from your server
+        To change password:
+        1. Login to admin panel
+        2. Click "Change Password" link
+        3. Enter current password, then new password
+        
+        Password is stored in localStorage.
+        For production, use a real backend with hashed passwords.
         */
     </script>
-
 </body>
 </html>
