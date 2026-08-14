@@ -38,6 +38,12 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Sembunyikan jika kosong atau tidak aktif */
+        .ad-wrap.hidden {
+            display: none !important;
         }
 
         .ad-wrap .ad-label {
@@ -543,7 +549,7 @@
         }
 
         // ================================================================
-        // 2. TAMPILKAN IKLAN - EKSEKUSI KODE DENGAN BENAR
+        // 2. TAMPILKAN IKLAN - HANYA YANG AKTIF
         // ================================================================
         function renderAds() {
             const ads = getAds();
@@ -562,47 +568,62 @@
                 banner300: 'adcode-banner300',
             };
 
+            // Mapping ID iklan ke container wrap
+            const wrapMap = {
+                popunder: 'ad-popunder',
+                socialbar: 'ad-socialbar',
+                smartlink: 'ad-smartlink',
+                banner728: 'ad-banner728',
+                native: 'ad-native',
+                banner468: 'ad-banner468',
+                banner320: 'ad-banner320',
+                banner160x600: 'ad-banner160x600',
+                banner160x300: 'ad-banner160x300',
+                banner300: 'ad-banner300',
+            };
+
             ads.forEach(ad => {
                 const elId = map[ad.id];
-                if (!elId) return;
+                const wrapId = wrapMap[ad.id];
+                if (!elId || !wrapId) return;
 
                 const el = document.getElementById(elId);
-                if (!el) return;
+                const wrap = document.getElementById(wrapId);
+                if (!el || !wrap) return;
 
                 // Kosongkan dulu
                 el.innerHTML = '';
 
                 // Jika aktif dan ada kode
-                if (ad.active && ad.code && ad.code.trim() !== '') {
+                const isActive = ad.active && ad.code && ad.code.trim() !== '';
+
+                if (isActive) {
+                    // Tampilkan wrap
+                    wrap.classList.remove('hidden');
+
                     try {
-                        // CARA 1: Coba eksekusi sebagai script
                         const code = ad.code.trim();
 
-                        // Deteksi apakah ini kode script
+                        // Deteksi dan eksekusi kode
                         if (code.includes('<script')) {
-                            // Ekstrak semua script tag
+                            // Ekstrak script
                             const scriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/gi;
                             let match;
                             let scripts = [];
                             let htmlContent = code;
 
-                            // Cari semua script
                             while ((match = scriptRegex.exec(code)) !== null) {
                                 scripts.push(match[1]);
-                                // Hapus script tag dari htmlContent
                                 htmlContent = htmlContent.replace(match[0], '');
                             }
 
-                            // Tampilkan HTML (non-script) dulu
                             if (htmlContent.trim() !== '') {
                                 el.innerHTML = htmlContent;
                             }
 
-                            // Eksekusi script
                             scripts.forEach(scriptCode => {
                                 if (scriptCode.trim() !== '') {
                                     try {
-                                        // Buat script element baru
                                         const scriptEl = document.createElement('script');
                                         scriptEl.textContent = scriptCode;
                                         document.body.appendChild(scriptEl);
@@ -612,7 +633,6 @@
                                 }
                             });
 
-                            // Jika ada script dengan src, buat element script
                             const srcRegex = /<script[^>]*src=["']([^"']*)["'][^>]*>/gi;
                             let srcMatch;
                             while ((srcMatch = srcRegex.exec(code)) !== null) {
@@ -621,46 +641,32 @@
                                 document.body.appendChild(scriptEl);
                             }
 
-                            console.log(`✅ Iklan "${ad.name}" dimuat dengan script`);
-
                         } else if (code.includes('<iframe') || code.includes('<img') || code.includes('<a') || code
                             .includes('<div')) {
-                            // CARA 2: HTML biasa (iframe, img, link)
                             el.innerHTML = code;
-                            console.log(`✅ Iklan "${ad.name}" dimuat sebagai HTML`);
-
                         } else if (code.includes('document.write') || code.includes('innerHTML')) {
-                            // CARA 3: Kode JavaScript murni
                             try {
                                 const scriptEl = document.createElement('script');
                                 scriptEl.textContent = code;
                                 document.body.appendChild(scriptEl);
-                                console.log(`✅ Iklan "${ad.name}" dimuat sebagai JavaScript`);
                             } catch (e) {
                                 console.warn('JS error:', e);
-                                el.innerHTML = `<span style="color:rgba(255,255,255,0.2);font-size:0.7rem;">[ ${ad.name} - Error ]</span>`;
                             }
-
                         } else {
-                            // CARA 4: Teks biasa
                             el.innerHTML = code;
-                            console.log(`✅ Iklan "${ad.name}" dimuat sebagai teks`);
                         }
 
                     } catch (e) {
-                        console.error(`❌ Gagal load iklan "${ad.name}":`, e);
-                        el.innerHTML =
-                            `<span style="color:rgba(255,100,100,0.3);font-size:0.7rem;">[ ${ad.name} - Error ]</span>`;
+                        console.error(`Error loading ad "${ad.name}":`, e);
+                        wrap.classList.add('hidden');
                     }
                 } else {
-                    // Tampilkan placeholder jika tidak aktif
-                    const label = ad.name || ad.id;
-                    el.innerHTML =
-                        `<span style="color:rgba(255,255,255,0.08);font-size:0.7rem;">[ ${label} - Tidak Aktif ]</span>`;
+                    // Sembunyikan wrap jika tidak aktif
+                    wrap.classList.add('hidden');
                 }
             });
 
-            console.log('📢 Iklan dimuat:', ads.filter(a => a.active && a.code).length, 'unit aktif');
+            console.log('📢 Iklan aktif:', ads.filter(a => a.active && a.code).length, 'unit');
         }
 
         // ================================================================
@@ -784,9 +790,8 @@
         });
 
         console.log('✅ Halaman siap!');
-        console.log('📢 Jumlah iklan di localStorage:', getAds().length);
+        console.log('📢 Iklan aktif:', getAds().filter(a => a.active && a.code).length);
         console.log('🖼️ Jumlah wallpaper:', wallpapers.length);
-        console.log('💡 Tips: Buka adminpanel.html untuk kelola iklan');
     </script>
 
 </body>
