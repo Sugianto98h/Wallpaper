@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wallpaper Gallery · Free Download</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wallpaper Gallery</title>
     <style>
+        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -24,153 +25,124 @@
             margin: 0 auto;
         }
 
-        /* ===== ADS STYLES ===== */
-        .ad-container {
+        /* ===== ADS ===== */
+        .ad-wrap {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 0.8rem;
-            padding: 0.6rem;
-            margin: 0.8rem 0;
+            padding: 0.5rem;
+            margin: 0.6rem 0;
             text-align: center;
+            min-height: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 30px;
         }
 
-        .ad-container .ad-label {
+        .ad-wrap .ad-label {
             font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.1);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 0.2rem;
         }
 
-        .ad-container .ad-placeholder {
-            color: rgba(255, 255, 255, 0.06);
-            font-size: 0.7rem;
-            min-height: 25px;
+        .ad-wrap .ad-box {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-        }
-
-        .ad-container .ad-placeholder iframe,
-        .ad-container .ad-placeholder script {
-            display: block;
-        }
-
-        .ad-container .ad-placeholder img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .ad-728x90 { min-height: 90px; width: 100%; max-width: 728px; margin: 0 auto; }
-        .ad-468x60 { min-height: 60px; width: 100%; max-width: 468px; margin: 0 auto; }
-        .ad-320x50 { min-height: 50px; width: 100%; max-width: 320px; margin: 0 auto; }
-        .ad-300x250 { min-height: 250px; width: 100%; max-width: 300px; margin: 0 auto; }
-        .ad-160x600 { min-height: 600px; width: 100%; max-width: 160px; margin: 0 auto; }
-        .ad-160x300 { min-height: 300px; width: 100%; max-width: 160px; margin: 0 auto; }
-
-        .ad-native {
-            min-height: 100px;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .ad-smartlink {
-            min-height: 50px;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 0.6rem;
-            background: rgba(70, 150, 255, 0.04);
-            border-radius: 0.8rem;
-            border: 1px solid rgba(70, 150, 255, 0.06);
-        }
-
-        .ad-popunder {
             min-height: 30px;
-            width: 100%;
+        }
+
+        .ad-wrap .ad-box iframe,
+        .ad-wrap .ad-box img,
+        .ad-wrap .ad-box script {
+            max-width: 100%;
+        }
+
+        /* Ukuran spesifik */
+        .ad-728x90 {
+            min-height: 90px;
+            max-width: 728px;
+            margin: 0 auto;
+        }
+        .ad-468x60 {
+            min-height: 60px;
+            max-width: 468px;
+            margin: 0 auto;
+        }
+        .ad-320x50 {
+            min-height: 50px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        .ad-300x250 {
+            min-height: 250px;
             max-width: 300px;
             margin: 0 auto;
-            padding: 0.3rem;
-            background: rgba(255, 70, 70, 0.02);
-            border-radius: 0.8rem;
-            border: 1px solid rgba(255, 70, 70, 0.04);
         }
-
+        .ad-160x600 {
+            min-height: 400px;
+            max-width: 160px;
+            margin: 0 auto;
+        }
+        .ad-160x300 {
+            min-height: 200px;
+            max-width: 160px;
+            margin: 0 auto;
+        }
+        .ad-native {
+            min-height: 80px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .ad-smartlink {
+            min-height: 50px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .ad-popunder {
+            min-height: 30px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
         .ad-socialbar {
             min-height: 30px;
-            width: 100%;
             max-width: 500px;
             margin: 0 auto;
-            padding: 0.3rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 0.8rem;
         }
 
-        .ad-grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .ad-grid-2 .ad-container {
-            margin: 0;
-        }
-
-        .ad-sidebar-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 180px;
-            gap: 1.5rem;
-            align-items: start;
-            margin: 1rem 0;
-        }
-
+        /* ===== LAYOUT ===== */
         .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
-            margin-bottom: 1rem;
-            transition: color 0.3s ease;
+            margin: 0.5rem 0 1rem;
             font-size: 0.85rem;
         }
-
         .back-btn:hover {
-            color: #ffffff;
+            color: #fff;
         }
 
         .header {
             text-align: center;
             margin-bottom: 1.5rem;
         }
-
         .header h1 {
             font-size: 2.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #ffffff, #7abfff);
+            background: linear-gradient(135deg, #fff, #7abfff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 0.3rem;
         }
-
         .header p {
             color: rgba(255, 255, 255, 0.5);
-            font-size: 1rem;
         }
-
         .header .badge {
             display: inline-block;
             background: rgba(255, 255, 255, 0.06);
@@ -182,7 +154,14 @@
             margin-top: 0.5rem;
         }
 
-        /* ===== GALLERY ===== */
+        .sidebar-wrap {
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            gap: 1.5rem;
+            align-items: start;
+            margin: 1rem 0;
+        }
+
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -194,37 +173,32 @@
             border-radius: 1rem;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(8px);
+            transition: 0.3s;
         }
-
         .wallpaper-card:hover {
             transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.12);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .wallpaper-thumb {
             width: 100%;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 16/9;
             overflow: hidden;
             background: #1a1f2e;
-            position: relative;
             cursor: pointer;
+            position: relative;
         }
-
         .wallpaper-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: 0.4s;
         }
-
         .wallpaper-card:hover .wallpaper-thumb img {
             transform: scale(1.05);
         }
-
-        .wallpaper-thumb .preview-overlay {
+        .wallpaper-thumb .overlay {
             position: absolute;
             inset: 0;
             background: rgba(0, 0, 0, 0.4);
@@ -232,34 +206,28 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: 0.3s;
             backdrop-filter: blur(2px);
         }
-
-        .wallpaper-thumb:hover .preview-overlay {
+        .wallpaper-thumb:hover .overlay {
             opacity: 1;
         }
-
-        .wallpaper-thumb .preview-overlay span {
+        .wallpaper-thumb .overlay span {
             background: rgba(255, 255, 255, 0.15);
             padding: 0.4rem 1rem;
             border-radius: 60px;
             font-size: 0.7rem;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(4px);
-            color: white;
+            color: #fff;
         }
 
         .wallpaper-info {
             padding: 0.8rem 1rem 1rem;
         }
-
         .wallpaper-info .title {
-            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.1rem;
+            font-size: 0.95rem;
         }
-
         .wallpaper-info .meta {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.35);
@@ -270,7 +238,6 @@
             display: flex;
             gap: 0.4rem;
         }
-
         .btn-group .btn {
             flex: 1;
             display: inline-flex;
@@ -282,59 +249,41 @@
             font-size: 0.7rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             text-decoration: none;
             border: 1px solid rgba(255, 255, 255, 0.06);
             background: rgba(255, 255, 255, 0.03);
             color: #eef4ff;
         }
-
         .btn-group .btn-download {
             background: rgba(70, 150, 255, 0.15);
             border-color: rgba(70, 150, 255, 0.2);
             flex: 2;
         }
-
         .btn-group .btn-download:hover {
             background: rgba(70, 150, 255, 0.3);
-            border-color: rgba(70, 150, 255, 0.4);
         }
-
         .btn-group .btn-share:hover {
             background: rgba(255, 255, 255, 0.06);
         }
-
         .btn-group .btn svg {
             width: 12px;
             height: 12px;
             fill: currentColor;
-            flex-shrink: 0;
         }
 
-        .ad-grid-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 1rem;
-            padding: 1.5rem 0.5rem;
+        .empty-state {
+            grid-column: 1 / -1;
             text-align: center;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            padding: 3rem 1rem;
+            color: rgba(255, 255, 255, 0.2);
         }
-
-        .ad-grid-item .ad-label {
-            font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.12);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .empty-state h3 {
+            color: rgba(255, 255, 255, 0.4);
         }
-
-        .ad-grid-item .ad-content {
-            color: rgba(255, 255, 255, 0.06);
-            font-size: 0.7rem;
-            margin-top: 0.3rem;
+        .empty-state a {
+            color: #7abfff;
+            text-decoration: none;
         }
 
         .modal {
@@ -348,11 +297,9 @@
             justify-content: center;
             padding: 2rem;
         }
-
         .modal.active {
             display: flex;
         }
-
         .modal-content {
             max-width: 90vw;
             max-height: 80vh;
@@ -364,42 +311,35 @@
             justify-content: center;
             overflow: hidden;
         }
-
         .modal-content img {
-            width: auto;
-            height: auto;
             max-width: 100%;
             max-height: 80vh;
             object-fit: contain;
-            display: block;
             border-radius: 0.8rem;
         }
-
         .modal-close {
             position: fixed;
             top: 1rem;
             right: 1rem;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            color: white;
+            color: #fff;
             width: 42px;
             height: 42px;
             border-radius: 50%;
             font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1001;
             backdrop-filter: blur(8px);
         }
-
         .modal-close:hover {
             background: rgba(255, 255, 255, 0.12);
             transform: rotate(90deg);
         }
-
         .modal-download-btn {
             position: fixed;
             bottom: 1.5rem;
@@ -408,11 +348,11 @@
             background: rgba(70, 150, 255, 0.2);
             border: 1px solid rgba(70, 150, 255, 0.25);
             border-radius: 60px;
-            color: white;
+            color: #fff;
             font-size: 0.8rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -420,42 +360,13 @@
             backdrop-filter: blur(8px);
             z-index: 1001;
         }
-
         .modal-download-btn:hover {
             background: rgba(70, 150, 255, 0.35);
-            border-color: rgba(70, 150, 255, 0.5);
         }
-
         .modal-download-btn svg {
             width: 16px;
             height: 16px;
             fill: currentColor;
-        }
-
-        .modal-ad {
-            position: fixed;
-            bottom: 5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 0.6rem;
-            padding: 0.3rem 1.2rem;
-            z-index: 1001;
-            backdrop-filter: blur(8px);
-            text-align: center;
-        }
-
-        .modal-ad .ad-label {
-            font-size: 0.45rem;
-            color: rgba(255, 255, 255, 0.1);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .modal-ad .ad-content {
-            color: rgba(255, 255, 255, 0.06);
-            font-size: 0.6rem;
         }
 
         .toast {
@@ -471,27 +382,14 @@
             color: #eef4ff;
             font-size: 0.8rem;
             opacity: 0;
-            transition: all 0.5s ease;
+            transition: 0.5s;
             z-index: 2000;
             pointer-events: none;
             white-space: nowrap;
         }
-
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
-        }
-
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem 1rem;
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        .empty-state h3 {
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 0.3rem;
         }
 
         .footer-text {
@@ -502,10 +400,7 @@
         }
 
         @media (max-width: 768px) {
-            .ad-sidebar-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .ad-grid-2 {
+            .sidebar-wrap {
                 grid-template-columns: 1fr;
             }
             .header h1 {
@@ -515,18 +410,8 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 1rem;
             }
-            .ad-160x600, .ad-160x300 {
-                min-height: 100px;
-                max-width: 100%;
-            }
-            .ad-728x90 { min-height: 60px; }
-            .ad-300x250 { min-height: 180px; }
         }
-
         @media (max-width: 480px) {
-            body {
-                padding: 0.8rem;
-            }
             .gallery {
                 grid-template-columns: 1fr;
             }
@@ -537,102 +422,105 @@
     </style>
 </head>
 <body>
+
     <div class="container">
-        <!-- ===== ADS SECTION ===== -->
-        <div id="adsContainer">
-            <!-- Popunder -->
-            <div class="ad-container ad-popunder" id="ad-popunder">
-                <div class="ad-label">Popunder</div>
-                <div class="ad-placeholder" id="adcode-popunder"></div>
-            </div>
 
-            <!-- Social Bar -->
-            <div class="ad-container ad-socialbar" id="ad-socialbar">
-                <div class="ad-label">Social Bar</div>
-                <div class="ad-placeholder" id="adcode-socialbar"></div>
-            </div>
+        <!-- ===== POPUNDER ===== -->
+        <div class="ad-wrap ad-popunder" id="ad-popunder">
+            <div class="ad-label">POPUNDER</div>
+            <div class="ad-box" id="adcode-popunder"></div>
+        </div>
 
-            <!-- Smartlink -->
-            <div class="ad-container ad-smartlink" id="ad-smartlink">
-                <div class="ad-label">Smartlink</div>
-                <div class="ad-placeholder" id="adcode-smartlink"></div>
-            </div>
+        <!-- ===== SOCIAL BAR ===== -->
+        <div class="ad-wrap ad-socialbar" id="ad-socialbar">
+            <div class="ad-label">SOCIAL BAR</div>
+            <div class="ad-box" id="adcode-socialbar"></div>
+        </div>
 
-            <!-- Banner 728x90 -->
-            <div class="ad-container ad-728x90" id="ad-banner728">
-                <div class="ad-label">Banner 728x90</div>
-                <div class="ad-placeholder" id="adcode-banner728"></div>
-            </div>
+        <!-- ===== SMARTLINK ===== -->
+        <div class="ad-wrap ad-smartlink" id="ad-smartlink">
+            <div class="ad-label">SMARTLINK</div>
+            <div class="ad-box" id="adcode-smartlink"></div>
+        </div>
 
-            <a href="index.html" class="back-btn">← Back to Home</a>
+        <!-- ===== BANNER 728x90 ===== -->
+        <div class="ad-wrap ad-728x90" id="ad-banner728">
+            <div class="ad-label">BANNER 728x90</div>
+            <div class="ad-box" id="adcode-banner728"></div>
+        </div>
 
-            <header class="header">
-                <h1>Wallpaper Gallery</h1>
-                <p>Click image to preview · Download or Share</p>
-                <div class="badge">Free HD Wallpapers</div>
-            </header>
+        <a href="index.html" class="back-btn">← Back to Home</a>
 
-            <!-- Native Banner -->
-            <div class="ad-container ad-native" id="ad-native">
-                <div class="ad-label">Native Banner</div>
-                <div class="ad-placeholder" id="adcode-native"></div>
-            </div>
+        <header class="header">
+            <h1>Wallpaper Gallery</h1>
+            <p>Click image to preview · Download or Share</p>
+            <div class="badge">Free HD Wallpapers</div>
+        </header>
 
-            <div class="ad-sidebar-wrapper">
-                <div>
-                    <div class="gallery" id="gallery"></div>
+        <!-- ===== NATIVE BANNER ===== -->
+        <div class="ad-wrap ad-native" id="ad-native">
+            <div class="ad-label">NATIVE BANNER</div>
+            <div class="ad-box" id="adcode-native"></div>
+        </div>
 
-                    <!-- Banner 468x60 -->
-                    <div class="ad-container ad-468x60" id="ad-banner468" style="margin-top: 1rem;">
-                        <div class="ad-label">Banner 468x60</div>
-                        <div class="ad-placeholder" id="adcode-banner468"></div>
-                    </div>
+        <div class="sidebar-wrap">
 
-                    <!-- Banner 320x50 -->
-                    <div class="ad-container ad-320x50" id="ad-banner320">
-                        <div class="ad-label">Banner 320x50</div>
-                        <div class="ad-placeholder" id="adcode-banner320"></div>
-                    </div>
+            <!-- ===== MAIN CONTENT ===== -->
+            <div>
+
+                <!-- ===== GALLERY ===== -->
+                <div class="gallery" id="gallery"></div>
+
+                <!-- ===== BANNER 468x60 ===== -->
+                <div class="ad-wrap ad-468x60" id="ad-banner468" style="margin-top: 1rem;">
+                    <div class="ad-label">BANNER 468x60</div>
+                    <div class="ad-box" id="adcode-banner468"></div>
                 </div>
 
-                <div>
-                    <!-- Banner 160x600 -->
-                    <div class="ad-container ad-160x600" id="ad-banner160x600">
-                        <div class="ad-label">Banner 160x600</div>
-                        <div class="ad-placeholder" id="adcode-banner160x600"></div>
-                    </div>
-
-                    <!-- Banner 160x300 -->
-                    <div class="ad-container ad-160x300" id="ad-banner160x300" style="margin-top: 0.8rem;">
-                        <div class="ad-label">Banner 160x300</div>
-                        <div class="ad-placeholder" id="adcode-banner160x300"></div>
-                    </div>
-
-                    <!-- Banner 300x250 -->
-                    <div class="ad-container ad-300x250" id="ad-banner300" style="margin-top: 0.8rem;">
-                        <div class="ad-label">Banner 300x250</div>
-                        <div class="ad-placeholder" id="adcode-banner300"></div>
-                    </div>
+                <!-- ===== BANNER 320x50 ===== -->
+                <div class="ad-wrap ad-320x50" id="ad-banner320">
+                    <div class="ad-label">BANNER 320x50</div>
+                    <div class="ad-box" id="adcode-banner320"></div>
                 </div>
+
             </div>
 
-            <!-- Banner 468x60 Bottom -->
-            <div class="ad-container ad-468x60" id="ad-banner468-bottom" style="margin-top: 1rem;">
-                <div class="ad-label">Banner 468x60</div>
-                <div class="ad-placeholder" id="adcode-banner468-bottom"></div>
+            <!-- ===== SIDEBAR ===== -->
+            <div>
+
+                <!-- ===== BANNER 160x600 ===== -->
+                <div class="ad-wrap ad-160x600" id="ad-banner160x600">
+                    <div class="ad-label">BANNER 160x600</div>
+                    <div class="ad-box" id="adcode-banner160x600"></div>
+                </div>
+
+                <!-- ===== BANNER 160x300 ===== -->
+                <div class="ad-wrap ad-160x300" id="ad-banner160x300" style="margin-top: 0.8rem;">
+                    <div class="ad-label">BANNER 160x300</div>
+                    <div class="ad-box" id="adcode-banner160x300"></div>
+                </div>
+
+                <!-- ===== BANNER 300x250 ===== -->
+                <div class="ad-wrap ad-300x250" id="ad-banner300" style="margin-top: 0.8rem;">
+                    <div class="ad-label">BANNER 300x250</div>
+                    <div class="ad-box" id="adcode-banner300"></div>
+                </div>
+
             </div>
+
         </div>
 
         <div class="footer-text">
             Data stored in your browser · localStorage
         </div>
+
     </div>
 
     <!-- ===== MODAL ===== -->
     <div class="modal" id="modal">
         <button class="modal-close" id="modalClose">×</button>
         <div class="modal-content">
-            <img id="modalImage" src="" alt="Preview wallpaper">
+            <img id="modalImage" src="" alt="Preview" />
         </div>
         <a href="#" id="modalDownloadBtn" class="modal-download-btn" download>
             <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -643,113 +531,104 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // ============================================================
-        // LOAD ADS FROM LOCALSTORAGE
-        // ============================================================
-        const ADS_STORAGE_KEY = 'ads_codes';
+        // ================================================================
+        // 1. AMBIL DATA IKLAN DARI LOCALSTORAGE
+        // ================================================================
+        const ADS_KEY = 'ads_codes';
 
-        function loadAds() {
+        function getAds() {
             try {
-                const data = localStorage.getItem(ADS_STORAGE_KEY);
-                if (data) {
-                    return JSON.parse(data);
-                }
-                return [];
+                const raw = localStorage.getItem(ADS_KEY);
+                if (!raw) return [];
+                return JSON.parse(raw);
             } catch {
                 return [];
             }
         }
 
+        // ================================================================
+        // 2. TAMPILKAN IKLAN
+        // ================================================================
         function renderAds() {
-            const ads = loadAds();
+            const ads = getAds();
 
-            // Map ad IDs to container IDs
-            const adMap = {
-                'popunder': 'adcode-popunder',
-                'socialbar': 'adcode-socialbar',
-                'smartlink': 'adcode-smartlink',
-                'banner728': 'adcode-banner728',
-                'native': 'adcode-native',
-                'banner468': 'adcode-banner468',
-                'banner320': 'adcode-banner320',
-                'banner160x600': 'adcode-banner160x600',
-                'banner160x300': 'adcode-banner160x300',
-                'banner300': 'adcode-banner300'
+            // Mapping ID iklan ke element ID
+            const map = {
+                popunder: 'adcode-popunder',
+                socialbar: 'adcode-socialbar',
+                smartlink: 'adcode-smartlink',
+                banner728: 'adcode-banner728',
+                native: 'adcode-native',
+                banner468: 'adcode-banner468',
+                banner320: 'adcode-banner320',
+                banner160x600: 'adcode-banner160x600',
+                banner160x300: 'adcode-banner160x300',
+                banner300: 'adcode-banner300',
             };
 
             ads.forEach(ad => {
-                const containerId = adMap[ad.id];
-                if (!containerId) return;
+                const elId = map[ad.id];
+                if (!elId) return;
 
-                const container = document.getElementById(containerId);
-                if (!container) return;
+                const el = document.getElementById(elId);
+                if (!el) return;
 
-                // Show ad if active and has code
+                // Jika aktif dan ada kode, tampilkan kodenya
                 if (ad.active && ad.code && ad.code.trim() !== '') {
-                    // Insert the ad code
-                    container.innerHTML = ad.code;
+                    el.innerHTML = ad.code;
                 } else {
-                    // Show placeholder
+                    // Tampilkan placeholder
                     const label = ad.name || ad.id;
-                    container.innerHTML = `<span style="color: rgba(255,255,255,0.08); font-size: 0.7rem;">[ ${label} - Inactive ]</span>`;
+                    el.innerHTML =
+                        `<span style="color:rgba(255,255,255,0.08);font-size:0.7rem;">[ ${label} - Tidak Aktif ]</span>`;
                 }
             });
 
-            // Also handle Native Banner in modal
-            const nativeAd = ads.find(a => a.id === 'native');
-            const modalAd = document.querySelector('.modal-ad .ad-content');
-            if (modalAd && nativeAd && nativeAd.active && nativeAd.code) {
-                modalAd.innerHTML = nativeAd.code;
-            } else if (modalAd) {
-                modalAd.textContent = '[ Native Banner ]';
-            }
+            // Debug: tampilkan di console
+            console.log('✅ Iklan dimuat:', ads.length, 'unit');
         }
 
-        // ============================================================
-        // WALLPAPER DATA
-        // ============================================================
-        const STORAGE_KEY = 'wallpaper_data';
+        // ================================================================
+        // 3. WALLPAPER
+        // ================================================================
+        const WP_KEY = 'wallpaper_data';
 
-        function loadWallpapers() {
+        function getWallpapers() {
             try {
-                const data = localStorage.getItem(STORAGE_KEY);
-                return data ? JSON.parse(data) : [];
+                const raw = localStorage.getItem(WP_KEY);
+                if (!raw) return [];
+                return JSON.parse(raw);
             } catch {
                 return [];
             }
         }
 
-        const wallpapers = loadWallpapers();
+        const wallpapers = getWallpapers();
         const gallery = document.getElementById('gallery');
         const modal = document.getElementById('modal');
-        const modalImage = document.getElementById('modalImage');
+        const modalImg = document.getElementById('modalImage');
         const modalClose = document.getElementById('modalClose');
-        const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+        const modalDownload = document.getElementById('modalDownloadBtn');
         const toast = document.getElementById('toast');
 
         function renderGallery() {
             if (wallpapers.length === 0) {
                 gallery.innerHTML = `
                     <div class="empty-state">
-                        <h3>No wallpapers available</h3>
-                        <p>Check back later for new wallpapers</p>
-                        <p style="margin-top: 0.5rem; font-size: 0.7rem; color: rgba(255,255,255,0.1);">
-                            Admin can upload via <a href="adminpanel.html" style="color: #7abfff; text-decoration: none;">Admin Panel</a>
-                        </p>
+                        <h3>Belum ada wallpaper</h3>
+                        <p>Admin bisa upload di <a href="adminpanel.html">Admin Panel</a></p>
                     </div>
                 `;
                 return;
             }
 
             let html = '';
-            wallpapers.forEach((wp, index) => {
+            wallpapers.forEach((wp, i) => {
                 html += `
                     <div class="wallpaper-card">
-                        <div class="wallpaper-thumb" onclick="openModal('${wp.image}', '${wp.download}', '${wp.title}')">
-                            <img src="${wp.image}" alt="${wp.title}" loading="lazy">
-                            <div class="preview-overlay">
-                                <span>Preview</span>
-                            </div>
+                        <div class="wallpaper-thumb" onclick="openModal('${wp.image}','${wp.download}','${wp.title}')">
+                            <img src="${wp.image}" alt="${wp.title}" loading="lazy" />
+                            <div class="overlay"><span>Preview</span></div>
                         </div>
                         <div class="wallpaper-info">
                             <div class="title">${wp.title}</div>
@@ -759,7 +638,7 @@
                                     <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                     Download
                                 </a>
-                                <button class="btn btn-share" onclick="shareWallpaper('${wp.title}', '${wp.image}')">
+                                <button class="btn btn-share" onclick="shareIt('${wp.title}','${wp.image}')">
                                     <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
                                     Share
                                 </button>
@@ -768,18 +647,19 @@
                     </div>
                 `;
 
-                // Insert ad after every 4 wallpapers
-                if ((index + 1) % 4 === 0 && index < wallpapers.length - 1) {
-                    // Try to get native ad from localStorage
-                    const ads = loadAds();
+                // Sisipkan iklan setiap 4 wallpaper
+                if ((i + 1) % 4 === 0 && i < wallpapers.length - 1) {
+                    const ads = getAds();
                     const nativeAd = ads.find(a => a.id === 'native');
-                    const adContent = nativeAd && nativeAd.active && nativeAd.code ? nativeAd.code : '📢 Sponsored';
-
+                    let adContent = '📢 Sponsored';
+                    if (nativeAd && nativeAd.active && nativeAd.code && nativeAd.code.trim() !== '') {
+                        adContent = nativeAd.code;
+                    }
                     html += `
-                        <div class="ad-grid-item">
-                            <div class="ad-label">Advertisement</div>
-                            <div style="font-size: 1.5rem; opacity: 0.15; margin: 0.3rem 0;">📢</div>
-                            <div class="ad-content">${adContent}</div>
+                        <div class="ad-wrap" style="min-height:120px;border:1px solid rgba(255,255,255,0.04);border-radius:1rem;padding:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                            <div class="ad-label">ADVERTISEMENT</div>
+                            <div style="font-size:1.5rem;opacity:0.1;margin:0.3rem 0;">📢</div>
+                            <div style="font-size:0.7rem;color:rgba(255,255,255,0.05);">${adContent}</div>
                         </div>
                     `;
                 }
@@ -788,10 +668,13 @@
             gallery.innerHTML = html;
         }
 
-        function openModal(imageUrl, downloadUrl, title) {
-            modalImage.src = imageUrl;
-            modalDownloadBtn.href = downloadUrl;
-            modalDownloadBtn.download = title + '.jpg';
+        // ================================================================
+        // 4. MODAL
+        // ================================================================
+        function openModal(imgUrl, dlUrl, title) {
+            modalImg.src = imgUrl;
+            modalDownload.href = dlUrl;
+            modalDownload.download = title + '.jpg';
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -802,95 +685,51 @@
         }
 
         modalClose.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-        function shareWallpaper(title, imageUrl) {
-            const shareData = {
-                title: title,
-                text: 'Check out this wallpaper: ' + title,
-                url: imageUrl
-            };
-
+        // ================================================================
+        // 5. SHARE
+        // ================================================================
+        function shareIt(title, url) {
+            const data = { title, text: 'Check this wallpaper: ' + title, url };
             if (navigator.share) {
-                navigator.share(shareData)
-                    .then(() => showToast('Shared!'))
-                    .catch((err) => {
-                        if (err.name !== 'AbortError') {
-                            fallbackShare(imageUrl);
-                        }
-                    });
+                navigator.share(data).catch(() => {});
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(() => showToast('URL copied!'));
             } else {
-                fallbackShare(imageUrl);
+                prompt('Copy URL:', url);
             }
         }
 
-        function fallbackShare(imageUrl) {
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(imageUrl)
-                    .then(() => showToast('URL copied!'))
-                    .catch(() => {
-                        window.open(imageUrl, '_blank');
-                        showToast('Opening in new tab');
-                    });
-            } else {
-                const textarea = document.createElement('textarea');
-                textarea.value = imageUrl;
-                document.body.appendChild(textarea);
-                textarea.select();
-                try {
-                    document.execCommand('copy');
-                    showToast('URL copied!');
-                } catch (e) {
-                    window.open(imageUrl, '_blank');
-                    showToast('Opening in new tab');
-                }
-                document.body.removeChild(textarea);
-            }
-        }
+        // ================================================================
+        // 6. TOAST
+        // ================================================================
+        let toastTimer;
 
-        let toastTimeout;
-
-        function showToast(message) {
-            toast.textContent = message;
+        function showToast(msg) {
+            toast.textContent = msg;
             toast.classList.add('show');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // ============================================================
-        // INIT - Render Gallery & Ads
-        // ============================================================
+        // ================================================================
+        // 7. JALANKAN
+        // ================================================================
         renderGallery();
         renderAds();
 
-        // Re-render ads when page loads (for any dynamic content)
+        // Jalankan ulang setiap kali halaman selesai loading
         document.addEventListener('DOMContentLoaded', function() {
             renderAds();
         });
 
-        // ============================================================
-        // NOTES FOR ADMIN:
-        // ============================================================
-        /*
-        CARA KERJA:
-        1. Admin masukkan kode iklan di Admin Panel (tab "Ad Codes")
-        2. Kode disimpan di localStorage dengan key 'ads_codes'
-        3. Halaman wallpaper membaca kode dari localStorage
-        4. Iklan akan tampil jika status "Active" dan ada kode
-
-        Jika iklan tidak muncul:
-        - Pastikan status "Active" (toggle hijau)
-        - Pastikan ada kode yang dimasukkan
-        - Clear cache browser (Ctrl+Shift+Delete)
-        - Buka di mode incognito untuk test
-        */
+        console.log('✅ Halaman siap!');
+        console.log('📢 Jumlah iklan di localStorage:', getAds().length);
+        console.log('🖼️ Jumlah wallpaper:', wallpapers.length);
+        console.log('💡 Tips: Buka adminpanel.html untuk kelola iklan');
     </script>
+
 </body>
 </html>
