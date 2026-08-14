@@ -16,7 +16,112 @@
             background: #0b0f1a;
             color: #eef4ff;
             min-height: 100vh;
-            padding: 2rem 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== ADS STYLES ===== */
+        .ad-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 0.8rem;
+            padding: 0.6rem;
+            margin: 0.8rem 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-container .ad-label {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.12);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+
+        .ad-container .ad-placeholder {
+            color: rgba(255, 255, 255, 0.06);
+            font-size: 0.7rem;
+            min-height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-728x90 { min-height: 90px; width: 100%; max-width: 728px; margin: 0 auto; }
+        .ad-468x60 { min-height: 60px; width: 100%; max-width: 468px; margin: 0 auto; }
+        .ad-320x50 { min-height: 50px; width: 100%; max-width: 320px; margin: 0 auto; }
+        .ad-300x250 { min-height: 250px; width: 100%; max-width: 300px; margin: 0 auto; }
+        .ad-160x600 { min-height: 600px; width: 100%; max-width: 160px; margin: 0 auto; }
+        .ad-160x300 { min-height: 300px; width: 100%; max-width: 160px; margin: 0 auto; }
+
+        .ad-native {
+            min-height: 100px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .ad-smartlink {
+            min-height: 50px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0.6rem;
+            background: rgba(70, 150, 255, 0.04);
+            border-radius: 0.8rem;
+            border: 1px solid rgba(70, 150, 255, 0.06);
+        }
+
+        .ad-popunder {
+            min-height: 30px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 0.3rem;
+            background: rgba(255, 70, 70, 0.02);
+            border-radius: 0.8rem;
+            border: 1px solid rgba(255, 70, 70, 0.04);
+        }
+
+        .ad-socialbar {
+            min-height: 30px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0.3rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0.8rem;
+        }
+
+        .ad-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .ad-grid-2 .ad-container {
+            margin: 0;
+        }
+
+        .ad-sidebar-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            gap: 1.5rem;
+            align-items: start;
+            margin: 1rem 0;
         }
 
         .back-btn {
@@ -25,9 +130,9 @@
             gap: 0.5rem;
             color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             transition: color 0.3s ease;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .back-btn:hover {
@@ -35,48 +140,46 @@
         }
 
         .header {
-            max-width: 1200px;
-            margin: 0 auto 3rem;
             text-align: center;
+            margin-bottom: 1.5rem;
         }
 
         .header h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 700;
             background: linear-gradient(135deg, #ffffff, #7abfff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .header p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
         }
 
         .header .badge {
             display: inline-block;
             background: rgba(255, 255, 255, 0.06);
-            padding: 0.4rem 1.5rem;
+            padding: 0.3rem 1.2rem;
             border-radius: 60px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: #8ab4ff;
-            margin-top: 0.8rem;
+            margin-top: 0.5rem;
         }
 
+        /* ===== GALLERY ===== */
         .gallery {
-            max-width: 1200px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.2rem;
         }
 
         .wallpaper-card {
             background: rgba(255, 255, 255, 0.04);
-            border-radius: 1.5rem;
+            border-radius: 1rem;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.06);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -84,9 +187,9 @@
         }
 
         .wallpaper-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .wallpaper-thumb {
@@ -127,33 +230,33 @@
 
         .wallpaper-thumb .preview-overlay span {
             background: rgba(255, 255, 255, 0.15);
-            padding: 0.6rem 1.5rem;
+            padding: 0.4rem 1rem;
             border-radius: 60px;
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(4px);
             color: white;
         }
 
         .wallpaper-info {
-            padding: 1.2rem 1.2rem 1.5rem;
+            padding: 0.8rem 1rem 1rem;
         }
 
         .wallpaper-info .title {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.1rem;
         }
 
         .wallpaper-info .meta {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 1rem;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-bottom: 0.6rem;
         }
 
         .btn-group {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.4rem;
         }
 
         .btn-group .btn {
@@ -161,51 +264,69 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
-            padding: 0.6rem 1rem;
+            gap: 0.2rem;
+            padding: 0.4rem 0.6rem;
             border-radius: 60px;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
             color: #eef4ff;
         }
 
         .btn-group .btn-download {
-            background: rgba(70, 150, 255, 0.2);
-            border-color: rgba(70, 150, 255, 0.3);
+            background: rgba(70, 150, 255, 0.15);
+            border-color: rgba(70, 150, 255, 0.2);
             flex: 2;
         }
 
         .btn-group .btn-download:hover {
-            background: rgba(70, 150, 255, 0.4);
-            border-color: rgba(70, 150, 255, 0.6);
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 80, 200, 0.3);
-        }
-
-        .btn-group .btn-share {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.08);
-            flex: 1;
+            background: rgba(70, 150, 255, 0.3);
+            border-color: rgba(70, 150, 255, 0.4);
         }
 
         .btn-group .btn-share:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .btn-group .btn svg {
-            width: 16px;
-            height: 16px;
+            width: 12px;
+            height: 12px;
             fill: currentColor;
             flex-shrink: 0;
         }
 
+        /* ===== AD IN GALLERY GRID ===== */
+        .ad-grid-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 1rem;
+            padding: 1.5rem 0.5rem;
+            text-align: center;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-grid-item .ad-label {
+            font-size: 0.5rem;
+            color: rgba(255, 255, 255, 0.12);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ad-grid-item .ad-content {
+            color: rgba(255, 255, 255, 0.06);
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== MODAL ===== */
         .modal {
             display: none;
             position: fixed;
@@ -223,56 +344,122 @@
         }
 
         .modal-content {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 1.5rem;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .modal-content img {
-            width: 100%;
-            height: 100%;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 80vh;
             object-fit: contain;
-            border-radius: 1.5rem;
+            display: block;
+            border-radius: 0.8rem;
         }
 
         .modal-close {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1;
+            z-index: 1001;
+            backdrop-filter: blur(8px);
         }
 
         .modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
             transform: rotate(90deg);
+        }
+
+        .modal-download-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            padding: 0.5rem 1.5rem;
+            background: rgba(70, 150, 255, 0.2);
+            border: 1px solid rgba(70, 150, 255, 0.25);
+            border-radius: 60px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            backdrop-filter: blur(8px);
+            z-index: 1001;
+        }
+
+        .modal-download-btn:hover {
+            background: rgba(70, 150, 255, 0.35);
+            border-color: rgba(70, 150, 255, 0.5);
+        }
+
+        .modal-download-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .modal-ad {
+            position: fixed;
+            bottom: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 0.6rem;
+            padding: 0.3rem 1.2rem;
+            z-index: 1001;
+            backdrop-filter: blur(8px);
+            text-align: center;
+        }
+
+        .modal-ad .ad-label {
+            font-size: 0.45rem;
+            color: rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-ad .ad-content {
+            color: rgba(255, 255, 255, 0.06);
+            font-size: 0.6rem;
         }
 
         .toast {
             position: fixed;
-            bottom: 2rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: rgba(30, 40, 60, 0.95);
             backdrop-filter: blur(12px);
-            padding: 0.8rem 2rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             color: #eef4ff;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             opacity: 0;
             transition: all 0.5s ease;
             z-index: 2000;
@@ -288,63 +475,170 @@
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 4rem 2rem;
-            color: rgba(255, 255, 255, 0.3);
+            padding: 3rem 1rem;
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .empty-state h3 {
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 0.3rem;
         }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem;
+        .footer-text {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.08);
+            font-size: 0.65rem;
+        }
+
+        @media (max-width: 768px) {
+            .ad-sidebar-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .ad-grid-2 {
+                grid-template-columns: 1fr;
             }
             .header h1 {
                 font-size: 2rem;
             }
             .gallery {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
             }
-            .modal-close {
-                top: 1rem;
-                right: 1rem;
-                width: 40px;
-                height: 40px;
-                font-size: 1.4rem;
+            .ad-160x600, .ad-160x300 {
+                min-height: 100px;
+                max-width: 100%;
+            }
+            .ad-728x90 { min-height: 60px; }
+            .ad-300x250 { min-height: 180px; }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .wallpaper-info .title {
+                font-size: 0.85rem;
             }
             .btn-group .btn {
-                font-size: 0.75rem;
-                padding: 0.5rem 0.8rem;
+                font-size: 0.65rem;
+                padding: 0.3rem 0.4rem;
             }
-            .toast {
-                font-size: 0.8rem;
-                padding: 0.6rem 1.2rem;
-                white-space: normal;
-                max-width: 90%;
+            .modal-close {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+            }
+            .modal-download-btn {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.4rem 1rem;
+                font-size: 0.7rem;
             }
         }
     </style>
 </head>
 <body>
-    <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="container">
+        <!-- ===== POPUNDER ===== -->
+        <div class="ad-container ad-popunder">
+            <div class="ad-label">Popunder</div>
+            <div class="ad-placeholder">[ Popunder_1 ]</div>
+        </div>
+
+        <!-- ===== SOCIAL BAR ===== -->
+        <div class="ad-container ad-socialbar">
+            <div class="ad-label">Social Bar</div>
+            <div class="ad-placeholder">[ SocialBar_1 ]</div>
+        </div>
+
+        <!-- ===== SMARTLINK ===== -->
+        <div class="ad-container ad-smartlink">
+            <div class="ad-label">Smartlink</div>
+            <div class="ad-placeholder">[ Smartlink_1 ]</div>
+        </div>
+
+        <!-- ===== BANNER 728x90 ===== -->
+        <div class="ad-container ad-728x90">
+            <div class="ad-label">Banner 728x90</div>
+            <div class="ad-placeholder">[ 728x90_1 ]</div>
+        </div>
+
         <a href="index.html" class="back-btn">← Back to Home</a>
+
+        <header class="header">
+            <h1>Wallpaper Gallery</h1>
+            <p>Click image to preview · Download or Share</p>
+            <div class="badge">Free HD Wallpapers</div>
+        </header>
+
+        <!-- ===== NATIVE BANNER ===== -->
+        <div class="ad-container ad-native">
+            <div class="ad-label">Native Banner</div>
+            <div class="ad-placeholder" style="min-height: 50px;">[ NativeBanner_1 ]</div>
+        </div>
+
+        <div class="ad-sidebar-wrapper">
+            <div>
+                <div class="gallery" id="gallery"></div>
+            </div>
+            <div>
+                <!-- ===== BANNER 160x600 ===== -->
+                <div class="ad-container ad-160x600">
+                    <div class="ad-label">Banner 160x600</div>
+                    <div class="ad-placeholder" style="min-height: 350px;">[ 160x600_1 ]</div>
+                </div>
+
+                <!-- ===== BANNER 160x300 ===== -->
+                <div class="ad-container ad-160x300" style="margin-top: 0.8rem;">
+                    <div class="ad-label">Banner 160x300</div>
+                    <div class="ad-placeholder">[ 160x300_1 ]</div>
+                </div>
+
+                <!-- ===== BANNER 300x250 ===== -->
+                <div class="ad-container ad-300x250" style="margin-top: 0.8rem;">
+                    <div class="ad-label">Banner 300x250</div>
+                    <div class="ad-placeholder" style="min-height: 180px;">[ 300x250_1 ]</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== BANNER 468x60 ===== -->
+        <div class="ad-container ad-468x60" style="margin-top: 1rem;">
+            <div class="ad-label">Banner 468x60</div>
+            <div class="ad-placeholder">[ 468x60_1 ]</div>
+        </div>
+
+        <!-- ===== BANNER 320x50 ===== -->
+        <div class="ad-container ad-320x50">
+            <div class="ad-label">Banner 320x50</div>
+            <div class="ad-placeholder">[ 320x50_1 ]</div>
+        </div>
+
+        <div class="footer-text">
+            Data stored in your browser · localStorage
+        </div>
     </div>
 
-    <header class="header">
-        <h1>Wallpaper Gallery</h1>
-        <p>Click image to preview · Download or Share</p>
-        <div class="badge">Free HD Wallpapers</div>
-    </header>
-
-    <div class="gallery" id="gallery"></div>
-
+    <!-- ===== MODAL ===== -->
     <div class="modal" id="modal">
         <button class="modal-close" id="modalClose">×</button>
         <div class="modal-content">
             <img id="modalImage" src="" alt="Preview wallpaper">
+        </div>
+        <a href="#" id="modalDownloadBtn" class="modal-download-btn" download>
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download
+        </a>
+        <div class="modal-ad">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-content">[ Native Banner ]</div>
         </div>
     </div>
 
@@ -367,6 +661,7 @@
         const modal = document.getElementById('modal');
         const modalImage = document.getElementById('modalImage');
         const modalClose = document.getElementById('modalClose');
+        const modalDownloadBtn = document.getElementById('modalDownloadBtn');
         const toast = document.getElementById('toast');
 
         function renderGallery() {
@@ -374,43 +669,59 @@
                 gallery.innerHTML = `
                     <div class="empty-state">
                         <h3>No wallpapers available</h3>
-                        <p>Check back later for new wallpapers</p>
-                        <p style="margin-top: 1rem; font-size: 0.8rem; color: rgba(255,255,255,0.2);">
-                            Admin can upload via <a href="adminpanel.html" style="color: #7abfff; text-decoration: none;">Admin Panel</a>
-                        </p>
+                        <p>Check back later</p>
                     </div>
                 `;
                 return;
             }
 
-            gallery.innerHTML = wallpapers.map(wp => `
-                <div class="wallpaper-card">
-                    <div class="wallpaper-thumb" onclick="openModal('${wp.image}')">
-                        <img src="${wp.image}" alt="${wp.title}" loading="lazy">
-                        <div class="preview-overlay">
-                            <span>Click to preview</span>
+            let html = '';
+            wallpapers.forEach((wp, index) => {
+                html += `
+                    <div class="wallpaper-card">
+                        <div class="wallpaper-thumb" onclick="openModal('${wp.image}', '${wp.download}', '${wp.title}')">
+                            <img src="${wp.image}" alt="${wp.title}" loading="lazy">
+                            <div class="preview-overlay">
+                                <span>Preview</span>
+                            </div>
+                        </div>
+                        <div class="wallpaper-info">
+                            <div class="title">${wp.title}</div>
+                            <div class="meta">${wp.category} · HD</div>
+                            <div class="btn-group">
+                                <a href="${wp.download}" download="${wp.title}.jpg" class="btn btn-download">
+                                    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                    Download
+                                </a>
+                                <button class="btn btn-share" onclick="shareWallpaper('${wp.title}', '${wp.image}')">
+                                    <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                                    Share
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="wallpaper-info">
-                        <div class="title">${wp.title}</div>
-                        <div class="meta">${wp.category} · HD</div>
-                        <div class="btn-group">
-                            <a href="${wp.download}" download="${wp.title}.jpg" class="btn btn-download">
-                                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                                Download
-                            </a>
-                            <button class="btn btn-share" onclick="shareWallpaper('${wp.title}', '${wp.image}')">
-                                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                                Share
-                            </button>
+                `;
+
+                // Insert ad after every 4 wallpapers
+                if ((index + 1) % 4 === 0 && index < wallpapers.length - 1) {
+                    html += `
+                        <div class="ad-grid-item">
+                            <div class="ad-label">Advertisement</div>
+                            <div style="font-size: 1.5rem; opacity: 0.15; margin: 0.3rem 0;">📢</div>
+                            <div class="ad-content">[ Native Banner ]</div>
+                            <div style="color: rgba(255,255,255,0.03); font-size: 0.6rem;">Sponsored</div>
                         </div>
-                    </div>
-                </div>
-            `).join('');
+                    `;
+                }
+            });
+
+            gallery.innerHTML = html;
         }
 
-        function openModal(src) {
-            modalImage.src = src;
+        function openModal(imageUrl, downloadUrl, title) {
+            modalImage.src = imageUrl;
+            modalDownloadBtn.href = downloadUrl;
+            modalDownloadBtn.download = title + '.jpg';
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -437,26 +748,24 @@
 
             if (navigator.share) {
                 navigator.share(shareData)
-                    .then(() => showToast('Shared successfully!'))
+                    .then(() => showToast('Shared!'))
                     .catch((err) => {
                         if (err.name !== 'AbortError') {
-                            fallbackShare(title, imageUrl);
+                            fallbackShare(imageUrl);
                         }
                     });
             } else {
-                fallbackShare(title, imageUrl);
+                fallbackShare(imageUrl);
             }
         }
 
-        function fallbackShare(title, imageUrl) {
+        function fallbackShare(imageUrl) {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(imageUrl)
-                    .then(() => {
-                        showToast('Image URL copied to clipboard!');
-                    })
+                    .then(() => showToast('URL copied!'))
                     .catch(() => {
                         window.open(imageUrl, '_blank');
-                        showToast('Opening image in new tab');
+                        showToast('Opening in new tab');
                     });
             } else {
                 const textarea = document.createElement('textarea');
@@ -465,10 +774,10 @@
                 textarea.select();
                 try {
                     document.execCommand('copy');
-                    showToast('Image URL copied to clipboard!');
+                    showToast('URL copied!');
                 } catch (e) {
                     window.open(imageUrl, '_blank');
-                    showToast('Opening image in new tab');
+                    showToast('Opening in new tab');
                 }
                 document.body.removeChild(textarea);
             }
@@ -482,7 +791,7 @@
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000);
+            }, 2500);
         }
 
         renderGallery();
