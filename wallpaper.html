@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallpaper Gallery · Free Download</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0b0f1a;
+            color: #eef4ff;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #7abfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 0.4rem 1.5rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #8ab4ff;
+            margin-top: 0.8rem;
+        }
+
+        /* ===== GALLERY GRID ===== */
+        .gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* ===== WALLPAPER CARD ===== */
+        .wallpaper-card {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .wallpaper-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ===== THUMBNAIL ===== */
+        .wallpaper-thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #1a1f2e;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .wallpaper-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .wallpaper-card:hover .wallpaper-thumb img {
+            transform: scale(1.05);
+        }
+
+        .wallpaper-thumb .preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .wallpaper-thumb:hover .preview-overlay {
+            opacity: 1;
+        }
+
+        .wallpaper-thumb .preview-overlay span {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            color: white;
+        }
+
+        /* ===== WALLPAPER INFO ===== */
+        .wallpaper-info {
+            padding: 1.2rem 1.2rem 1.5rem;
+        }
+
+        .wallpaper-info .title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .wallpaper-info .meta {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 1rem;
+        }
+
+        /* ===== BUTTON GROUP ===== */
+        .btn-group {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: #eef4ff;
+        }
+
+        .btn-group .btn-download {
+            background: rgba(70, 150, 255, 0.2);
+            border-color: rgba(70, 150, 255, 0.3);
+            flex: 2;
+        }
+
+        .btn-group .btn-download:hover {
+            background: rgba(70, 150, 255, 0.4);
+            border-color: rgba(70, 150, 255, 0.6);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 80, 200, 0.3);
+        }
+
+        .btn-group .btn-share {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.08);
+            flex: 1;
+        }
+
+        .btn-group .btn-share:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .btn-group .btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* ===== MODAL PREVIEW ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(16px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 1.5rem;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 1.5rem;
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(30, 40, 60, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #eef4ff;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 2000;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .modal-close {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
+            }
+            .btn-group .btn {
+                font-size: 0.75rem;
+                padding: 0.5rem 0.8rem;
+            }
+            .toast {
+                font-size: 0.8rem;
+                padding: 0.6rem 1.2rem;
+                white-space: normal;
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <h1>Wallpaper Gallery</h1>
+        <p>Click image to preview · Download or Share</p>
+        <div class="badge">6 Free HD Wallpapers</div>
+    </header>
+
+    <!-- ===== GALLERY ===== -->
+    <div class="gallery" id="gallery"></div>
+
+    <!-- ===== MODAL PREVIEW ===== -->
+    <div class="modal" id="modal">
+        <button class="modal-close" id="modalClose">×</button>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Preview wallpaper">
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ============================================================
+        // WALLPAPER DATA — REPLACE WITH YOUR OWN IMAGES
+        // ============================================================
+        const wallpapers = [{
+            id: 1,
+            title: 'Golden Sunset',
+            category: 'Nature',
+            image: 'https://picsum.photos/seed/sunset/800/450',
+            download: 'https://picsum.photos/seed/sunset/1920/1080'
+        }, {
+            id: 2,
+            title: 'Misty Mountains',
+            category: 'Nature',
+            image: 'https://picsum.photos/seed/mountain/800/450',
+            download: 'https://picsum.photos/seed/mountain/1920/1080'
+        }, {
+            id: 3,
+            title: 'Night City',
+            category: 'Urban',
+            image: 'https://picsum.photos/seed/city/800/450',
+            download: 'https://picsum.photos/seed/city/1920/1080'
+        }, {
+            id: 4,
+            title: 'Tropical Forest',
+            category: 'Nature',
+            image: 'https://picsum.photos/seed/forest/800/450',
+            download: 'https://picsum.photos/seed/forest/1920/1080'
+        }, {
+            id: 5,
+            title: 'Starry Sky',
+            category: 'Astro',
+            image: 'https://picsum.photos/seed/stars/800/450',
+            download: 'https://picsum.photos/seed/stars/1920/1080'
+        }, {
+            id: 6,
+            title: 'Exotic Beach',
+            category: 'Nature',
+            image: 'https://picsum.photos/seed/beach/800/450',
+            download: 'https://picsum.photos/seed/beach/1920/1080'
+        }];
+
+        // ============================================================
+        // RENDER GALLERY
+        // ============================================================
+        const gallery = document.getElementById('gallery');
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+        const toast = document.getElementById('toast');
+
+        function renderGallery() {
+            gallery.innerHTML = wallpapers.map(wp => `
+                <div class="wallpaper-card">
+                    <div class="wallpaper-thumb" onclick="openModal('${wp.image}')">
+                        <img src="${wp.image}" alt="${wp.title}" loading="lazy">
+                        <div class="preview-overlay">
+                            <span>Click to preview</span>
+                        </div>
+                    </div>
+                    <div class="wallpaper-info">
+                        <div class="title">${wp.title}</div>
+                        <div class="meta">${wp.category} · HD</div>
+                        <div class="btn-group">
+                            <a href="${wp.download}" download="${wp.title}.jpg" class="btn btn-download">
+                                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                            <button class="btn btn-share" onclick="shareWallpaper('${wp.title}', '${wp.image}')">
+                                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                                Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============================================================
+        // MODAL FUNCTIONS
+        // ============================================================
+        function openModal(src) {
+            modalImage.src = src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============================================================
+        // SHARE FUNCTION
+        // ============================================================
+        function shareWallpaper(title, imageUrl) {
+            const shareData = {
+                title: title,
+                text: 'Check out this wallpaper: ' + title,
+                url: imageUrl
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => showToast('Shared successfully!'))
+                    .catch((err) => {
+                        if (err.name !== 'AbortError') {
+                            fallbackShare(title, imageUrl);
+                        }
+                    });
+            } else {
+                fallbackShare(title, imageUrl);
+            }
+        }
+
+        function fallbackShare(title, imageUrl) {
+            // Copy image URL to clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(imageUrl)
+                    .then(() => {
+                        showToast('Image URL copied to clipboard!');
+                    })
+                    .catch(() => {
+                        // Manual fallback: open in new window
+                        window.open(imageUrl, '_blank');
+                        showToast('Opening image in new tab');
+                    });
+            } else {
+                // Ultimate fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = imageUrl;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Image URL copied to clipboard!');
+                } catch (e) {
+                    window.open(imageUrl, '_blank');
+                    showToast('Opening image in new tab');
+                }
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // ============================================================
+        // TOAST NOTIFICATION
+        // ============================================================
+        let toastTimeout;
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        renderGallery();
+
+        // ============================================================
+        // HOW TO REPLACE IMAGES:
+        // ============================================================
+        /*
+        Replace the 'image' and 'download' URLs in the wallpapers array above.
+        
+        Option 1: Use local folder
+        ---------------------------
+        Create an 'images' folder and add your files:
+        /images/
+            wallpaper1.jpg
+            wallpaper2.jpg
+        
+        Then write:
+        image: 'images/wallpaper1.jpg',
+        download: 'images/wallpaper1.jpg'
+        
+        Option 2: Use image hosting
+        ----------------------------
+        Upload to Imgur, Postimages, or similar service
+        and use the direct image link.
+        
+        Option 3: Add more wallpapers
+        -----------------------------
+        Copy this block and fill in your data:
+        {
+            id: 7,
+            title: 'Your Title',
+            category: 'Category',
+            image: 'your-image-url.jpg',
+            download: 'your-download-url.jpg'
+        }
+        */
+    </script>
+
+</body>
+</html>
