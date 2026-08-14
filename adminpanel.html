@@ -16,281 +16,59 @@
             background: #0b0f1a;
             color: #eef4ff;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
-        /* ===== LOGIN PAGE ===== */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ===== LOGIN ===== */
         .login-container {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 2rem;
-            padding: 3rem 2.5rem;
+            padding: 2.5rem 2rem;
             max-width: 420px;
             width: 100%;
             backdrop-filter: blur(12px);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            margin: auto;
         }
 
         .login-container h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             background: linear-gradient(135deg, #ffffff, #7abfff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-align: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .login-container .subtitle {
             text-align: center;
             color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
         }
 
         .login-container .form-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .login-container .form-group label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
         }
 
         .login-container .form-group input {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border-radius: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.04);
-            color: #eef4ff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .login-container .form-group input:focus {
-            border-color: rgba(70, 150, 255, 0.4);
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .login-container .btn {
-            width: 100%;
-            padding: 0.8rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            background: rgba(70, 150, 255, 0.25);
-            border: 1px solid rgba(70, 150, 255, 0.3);
-            color: #eef4ff;
-        }
-
-        .login-container .btn:hover {
-            background: rgba(70, 150, 255, 0.4);
-            border-color: rgba(70, 150, 255, 0.6);
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 80, 200, 0.3);
-        }
-
-        .login-container .error {
-            color: #ff6b6b;
-            font-size: 0.85rem;
-            text-align: center;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .login-container .error.show {
-            display: block;
-        }
-
-        .login-container .footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 0.7rem;
-        }
-
-        /* ===== ADMIN PANEL ===== */
-        .admin-panel {
-            display: none;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .admin-panel.active {
-            display: block;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            margin-bottom: 2rem;
-            transition: color 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .back-btn:hover {
-            color: #ffffff;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff, #7abfff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .header-actions .stats {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
-
-        .btn {
-            padding: 0.6rem 1.5rem;
-            border-radius: 60px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.04);
-            color: #eef4ff;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: rgba(70, 150, 255, 0.25);
-            border-color: rgba(70, 150, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: rgba(70, 150, 255, 0.4);
-            border-color: rgba(70, 150, 255, 0.6);
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 80, 200, 0.3);
-        }
-
-        .btn-danger {
-            background: rgba(255, 70, 70, 0.15);
-            border-color: rgba(255, 70, 70, 0.2);
-            color: #ff6b6b;
-        }
-
-        .btn-danger:hover {
-            background: rgba(255, 70, 70, 0.25);
-            border-color: rgba(255, 70, 70, 0.4);
-            transform: scale(1.02);
-        }
-
-        .btn-success {
-            background: rgba(70, 220, 130, 0.15);
-            border-color: rgba(70, 220, 130, 0.2);
-            color: #6bff9e;
-        }
-
-        .btn-success:hover {
-            background: rgba(70, 220, 130, 0.25);
-            border-color: rgba(70, 220, 130, 0.4);
-            transform: scale(1.02);
-        }
-
-        .btn-logout {
-            background: rgba(255, 70, 70, 0.1);
-            border-color: rgba(255, 70, 70, 0.15);
-            color: #ff6b6b;
-        }
-
-        .btn-logout:hover {
-            background: rgba(255, 70, 70, 0.2);
-            border-color: rgba(255, 70, 70, 0.3);
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        .upload-area {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px dashed rgba(255, 255, 255, 0.08);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .upload-area:hover {
-            border-color: rgba(70, 150, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .upload-area.dragover {
-            border-color: rgba(70, 150, 255, 0.5);
-            background: rgba(70, 150, 255, 0.05);
-        }
-
-        .upload-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .upload-form .full-width {
-            grid-column: 1 / -1;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .form-group label {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .form-group input,
-        .form-group select {
             padding: 0.7rem 1rem;
             border-radius: 0.8rem;
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -301,26 +79,312 @@
             outline: none;
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
+        .login-container .form-group input:focus {
             border-color: rgba(70, 150, 255, 0.4);
             background: rgba(255, 255, 255, 0.06);
         }
 
+        .login-container .btn-login {
+            width: 100%;
+            padding: 0.7rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: rgba(70, 150, 255, 0.25);
+            border: 1px solid rgba(70, 150, 255, 0.3);
+            color: #eef4ff;
+        }
+
+        .login-container .btn-login:hover {
+            background: rgba(70, 150, 255, 0.4);
+            border-color: rgba(70, 150, 255, 0.6);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 80, 200, 0.3);
+        }
+
+        .login-container .error {
+            color: #ff6b6b;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 0.8rem;
+            display: none;
+        }
+
+        .login-container .error.show {
+            display: block;
+        }
+
+        .login-container .footer {
+            text-align: center;
+            margin-top: 1.2rem;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 0.65rem;
+        }
+
+        /* ===== ADMIN PANEL ===== */
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #7abfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header-actions .stats {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #eef4ff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-primary {
+            background: rgba(70, 150, 255, 0.2);
+            border-color: rgba(70, 150, 255, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: rgba(70, 150, 255, 0.35);
+            border-color: rgba(70, 150, 255, 0.5);
+        }
+
+        .btn-success {
+            background: rgba(70, 220, 130, 0.12);
+            border-color: rgba(70, 220, 130, 0.15);
+            color: #6bff9e;
+        }
+
+        .btn-success:hover {
+            background: rgba(70, 220, 130, 0.2);
+            border-color: rgba(70, 220, 130, 0.3);
+        }
+
+        .btn-danger {
+            background: rgba(255, 70, 70, 0.12);
+            border-color: rgba(255, 70, 70, 0.15);
+            color: #ff6b6b;
+        }
+
+        .btn-danger:hover {
+            background: rgba(255, 70, 70, 0.2);
+            border-color: rgba(255, 70, 70, 0.3);
+        }
+
+        .btn-logout {
+            background: rgba(255, 70, 70, 0.08);
+            border-color: rgba(255, 70, 70, 0.1);
+            color: #ff6b6b;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 70, 70, 0.15);
+            border-color: rgba(255, 70, 70, 0.2);
+        }
+
+        .btn-sm {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .change-password {
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+
+        .change-password a {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.7rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .change-password a:hover {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ===== TABS ===== */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tabs .tab {
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px solid transparent;
+        }
+
+        .tabs .tab:hover {
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .tabs .tab.active {
+            color: #ffffff;
+            background: rgba(70, 150, 255, 0.15);
+            border-color: rgba(70, 150, 255, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ===== WALLPAPER MANAGEMENT ===== */
+        .upload-area {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed rgba(255, 255, 255, 0.06);
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: rgba(70, 150, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .upload-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .upload-form .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #eef4ff;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: rgba(70, 150, 255, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+        }
+
         .form-group input[type="file"] {
-            padding: 0.5rem;
+            padding: 0.4rem;
             cursor: pointer;
         }
 
         .form-group input[type="file"]::file-selector-button {
-            padding: 0.4rem 1rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 0.6rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             background: rgba(255, 255, 255, 0.06);
             color: #eef4ff;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-right: 1rem;
+            margin-right: 0.8rem;
+            font-size: 0.8rem;
         }
 
         .form-group input[type="file"]::file-selector-button:hover {
@@ -330,47 +394,29 @@
         .form-actions {
             grid-column: 1 / -1;
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             justify-content: flex-end;
-            margin-top: 0.5rem;
-        }
-
-        .gallery-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .gallery-header h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .gallery-header .count {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
+            margin-top: 0.3rem;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
         .wallpaper-card {
             background: rgba(255, 255, 255, 0.04);
-            border-radius: 1.2rem;
+            border-radius: 1rem;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .wallpaper-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .wallpaper-card .thumb {
@@ -387,56 +433,227 @@
         }
 
         .wallpaper-card .info {
-            padding: 1rem 1.2rem 1.2rem;
+            padding: 0.8rem 1rem 1rem;
         }
 
         .wallpaper-card .info .title {
             font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.1rem;
         }
 
         .wallpaper-card .info .category {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 0.8rem;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 0.6rem;
         }
 
         .wallpaper-card .card-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .wallpaper-card .card-actions .btn {
             flex: 1;
             justify-content: center;
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.7rem;
         }
 
         .empty-state {
             text-align: center;
-            padding: 4rem 2rem;
-            color: rgba(255, 255, 255, 0.3);
+            padding: 3rem 1rem;
+            color: rgba(255, 255, 255, 0.2);
             grid-column: 1 / -1;
         }
 
         .empty-state h3 {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 0.3rem;
+        }
+
+        /* ===== ADS MANAGEMENT ===== */
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .ad-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 1rem;
+            padding: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .ad-card:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .ad-card .ad-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 0.5rem;
         }
 
+        .ad-card .ad-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .ad-card .ad-size {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.2rem 0.6rem;
+            border-radius: 60px;
+        }
+
+        .ad-card .ad-code {
+            margin: 0.5rem 0;
+        }
+
+        .ad-card .ad-code textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 0.5rem;
+            border-radius: 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.3);
+            color: #b0c4de;
+            font-size: 0.75rem;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .ad-card .ad-code textarea:focus {
+            border-color: rgba(70, 150, 255, 0.3);
+        }
+
+        .ad-card .ad-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .ad-card .ad-status .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .ad-card .ad-status .status-dot.active {
+            background: #6bff9e;
+            box-shadow: 0 0 10px rgba(70, 220, 130, 0.3);
+        }
+
+        .ad-card .ad-status .status-dot.inactive {
+            background: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 70, 70, 0.2);
+        }
+
+        .ad-card .ad-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .ad-card .ad-actions .btn {
+            flex: 1;
+            justify-content: center;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            min-width: 80px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch.active {
+            background: rgba(70, 220, 130, 0.3);
+            border-color: rgba(70, 220, 130, 0.2);
+        }
+
+        .toggle-switch .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-knob {
+            left: 20px;
+            background: #6bff9e;
+            box-shadow: 0 0 15px rgba(70, 220, 130, 0.3);
+        }
+
+        .ad-preview {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 0.7rem;
+        }
+
+        .ad-preview.has-code {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .copy-btn {
+            background: rgba(70, 150, 255, 0.1);
+            border-color: rgba(70, 150, 255, 0.15);
+            color: #8ab4ff;
+        }
+
+        .copy-btn:hover {
+            background: rgba(70, 150, 255, 0.2);
+            border-color: rgba(70, 150, 255, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: rgba(70, 220, 130, 0.15);
+            border-color: rgba(70, 220, 130, 0.2);
+            color: #6bff9e;
+        }
+
+        /* ===== TOAST ===== */
         .toast {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
             background: rgba(20, 30, 50, 0.95);
             backdrop-filter: blur(12px);
-            padding: 0.8rem 1.8rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             color: #eef4ff;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.4s ease;
@@ -451,30 +668,14 @@
         }
 
         .toast.success {
-            border-color: rgba(70, 220, 130, 0.3);
+            border-color: rgba(70, 220, 130, 0.2);
         }
 
         .toast.error {
-            border-color: rgba(255, 70, 70, 0.3);
+            border-color: rgba(255, 70, 70, 0.2);
         }
 
-        /* ===== CHANGE PASSWORD ===== */
-        .change-password {
-            margin-top: 0.5rem;
-            text-align: right;
-        }
-
-        .change-password a {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.8rem;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .change-password a:hover {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .upload-form {
                 grid-template-columns: 1fr;
@@ -491,103 +692,138 @@
                 flex-wrap: wrap;
             }
             .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .ads-grid {
                 grid-template-columns: 1fr;
             }
-            .toast {
-                bottom: 1rem;
-                right: 1rem;
-                left: 1rem;
-                border-radius: 1rem;
-                text-align: center;
+            .tabs .tab {
+                padding: 0.3rem 1rem;
+                font-size: 0.75rem;
             }
             .login-container {
                 padding: 2rem 1.5rem;
             }
         }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .ad-card .ad-actions .btn {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.5rem;
+                min-width: 60px;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- ===== LOGIN PAGE ===== -->
+        <div class="login-container" id="loginPage" style="margin: auto;">
+            <h1>Admin Panel</h1>
+            <p class="subtitle">Enter password to access</p>
 
-    <!-- ===== LOGIN PAGE ===== -->
-    <div class="login-container" id="loginPage">
-        <h1>Admin Panel</h1>
-        <p class="subtitle">Enter password to access</p>
-        <form id="loginForm">
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="passwordInput" placeholder="Enter admin password" autofocus>
-            </div>
-            <button type="submit" class="btn">Login</button>
-            <div class="error" id="loginError">Incorrect password. Please try again.</div>
-            <div class="footer">
-        </form>
-    </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="passwordInput" placeholder="Enter admin password" autofocus>
+                </div>
+                <button type="submit" class="btn-login">Login</button>
+                <div class="error" id="loginError">Incorrect password. Please try again.</div>
+                <div class="footer">Default password: <strong>admin123</strong></div>
+            </form>
+        </div>
 
-    <!-- ===== ADMIN PANEL ===== -->
-    <div class="admin-panel" id="adminPanel">
-        <div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+        <!-- ===== ADMIN PANEL ===== -->
+        <div class="admin-panel" id="adminPanel">
             <a href="index.html" class="back-btn">← Back to Home</a>
 
             <header class="header">
-                <h1>Wallpaper Admin Panel</h1>
+                <h1>Admin Panel</h1>
                 <div class="header-actions">
                     <span class="stats" id="stats">0 wallpapers</span>
                     <button class="btn btn-logout" onclick="logout()">
                         <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
                         Logout
                     </button>
-                    <button class="btn btn-danger" onclick="clearAllWallpapers()">
-                        <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-                        Clear All
-                    </button>
-                    <button class="btn btn-success" onclick="exportData()">
-                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                        Export JSON
-                    </button>
                 </div>
             </header>
 
-            <!-- Change Password -->
             <div class="change-password">
                 <a onclick="changePassword()">Change Password</a>
             </div>
 
-            <div class="upload-area" id="uploadArea">
-                <form class="upload-form" id="uploadForm">
-                    <div class="form-group full-width">
-                        <label>Upload Image</label>
-                        <input type="file" id="imageFile" accept="image/*" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" id="imageTitle" placeholder="e.g., Golden Sunset" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select id="imageCategory">
-                            <option value="Nature">Nature</option>
-                            <option value="Urban">Urban</option>
-                            <option value="Astro">Astro</option>
-                            <option value="Abstract">Abstract</option>
-                            <option value="Minimal">Minimal</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn" onclick="resetForm()">Reset</button>
-                        <button type="submit" class="btn btn-primary" id="uploadBtn">
-                            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                            Upload Wallpaper
-                        </button>
-                    </div>
-                </form>
+            <!-- ===== TABS ===== -->
+            <div class="tabs">
+                <div class="tab active" data-tab="wallpapers" onclick="switchTab('wallpapers')">🖼️ Wallpapers</div>
+                <div class="tab" data-tab="ads" onclick="switchTab('ads')">📢 Ad Codes</div>
             </div>
 
-            <div class="gallery-header">
-                <h2>Wallpaper Collection</h2>
-                <span class="count" id="wallpaperCount">0 items</span>
+            <!-- ===== TAB 1: WALLPAPERS ===== -->
+            <div class="tab-content active" id="tab-wallpapers">
+                <div class="upload-area" id="uploadArea">
+                    <form class="upload-form" id="uploadForm">
+                        <div class="form-group full-width">
+                            <label>Upload Image</label>
+                            <input type="file" id="imageFile" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="imageTitle" placeholder="e.g., Golden Sunset" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="imageCategory">
+                                <option value="Nature">Nature</option>
+                                <option value="Urban">Urban</option>
+                                <option value="Astro">Astro</option>
+                                <option value="Abstract">Abstract</option>
+                                <option value="Minimal">Minimal</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn" onclick="resetForm()">Reset</button>
+                            <button type="submit" class="btn btn-primary" id="uploadBtn">
+                                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                                Upload
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="font-size: 1.2rem;">Wallpaper Collection</h2>
+                    <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;" id="wallpaperCount">0 items</span>
+                </div>
+                <div class="gallery-grid" id="galleryGrid"></div>
             </div>
-            <div class="gallery-grid" id="galleryGrid"></div>
+
+            <!-- ===== TAB 2: AD CODES ===== -->
+            <div class="tab-content" id="tab-ads">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                    <h2 style="font-size: 1.2rem;">Ad Code Management</h2>
+                    <div>
+                        <button class="btn btn-success btn-sm" onclick="saveAllAds()">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                            Save All
+                        </button>
+                        <button class="btn btn-sm" onclick="resetAllAds()" style="margin-left: 0.5rem;">
+                            Reset All
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ads-grid" id="adsGrid"></div>
+            </div>
         </div>
     </div>
 
@@ -599,9 +835,8 @@
         // ============================================================
         const PASSWORD_KEY = 'admin_password';
         const SESSION_KEY = 'admin_logged_in';
-        const DEFAULT_PASSWORD = 'didi123';
+        const DEFAULT_PASSWORD = 'admin123';
 
-        // Initialize password if not exists
         if (!localStorage.getItem(PASSWORD_KEY)) {
             localStorage.setItem(PASSWORD_KEY, DEFAULT_PASSWORD);
         }
@@ -638,6 +873,7 @@
             loginPage.style.display = 'none';
             adminPanel.classList.add('active');
             renderGallery();
+            renderAds();
         }
 
         loginForm.addEventListener('submit', function(e) {
@@ -662,9 +898,6 @@
             showToast('Logged out', 'info');
         }
 
-        // ============================================================
-        // CHANGE PASSWORD
-        // ============================================================
         function changePassword() {
             const current = prompt('Enter current password:');
             if (current === null) return;
@@ -694,7 +927,234 @@
         }
 
         // ============================================================
-        // DATA STORAGE
+        // TABS
+        // ============================================================
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+
+            document.querySelector(`.tab[data-tab="${tab}"]`).classList.add('active');
+            document.getElementById(`tab-${tab}`).classList.add('active');
+
+            if (tab === 'ads') renderAds();
+        }
+
+        // ============================================================
+        // ADS DATA
+        // ============================================================
+        const ADS_STORAGE_KEY = 'ads_codes';
+
+        const defaultAds = [
+            { id: 'popunder', name: 'Popunder', code: 'Popunder_1', size: 'Popunder', active: true },
+            { id: 'socialbar', name: 'Social Bar', code: 'SocialBar_1', size: 'Social Bar', active: true },
+            { id: 'smartlink', name: 'Smartlink', code: 'Smartlink_1', size: 'Smartlink', active: true },
+            { id: 'native', name: 'Native Banner', code: 'NativeBanner_1', size: 'Native', active: true },
+            { id: 'banner468', name: 'Banner 468x60', code: '468x60_1', size: '468×60', active: true },
+            { id: 'banner300', name: 'Banner 300x250', code: '300x250_1', size: '300×250', active: true },
+            { id: 'banner160x600', name: 'Banner 160x600', code: '160x600_1', size: '160×600', active: true },
+            { id: 'banner160x300', name: 'Banner 160x300', code: '160x300_1', size: '160×300', active: true },
+            { id: 'banner320', name: 'Banner 320x50', code: '320x50_1', size: '320×50', active: true },
+            { id: 'banner728', name: 'Banner 728x90', code: '728x90_1', size: '728×90', active: true }
+        ];
+
+        function loadAds() {
+            try {
+                const data = localStorage.getItem(ADS_STORAGE_KEY);
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    // Merge with defaults to ensure all fields exist
+                    return defaultAds.map(def => {
+                        const existing = parsed.find(p => p.id === def.id);
+                        return existing ? { ...def, ...existing } : def;
+                    });
+                }
+                return defaultAds;
+            } catch {
+                return defaultAds;
+            }
+        }
+
+        function saveAds(ads) {
+            localStorage.setItem(ADS_STORAGE_KEY, JSON.stringify(ads));
+        }
+
+        let ads = loadAds();
+
+        // ============================================================
+        // RENDER ADS
+        // ============================================================
+        function renderAds() {
+            const grid = document.getElementById('adsGrid');
+
+            grid.innerHTML = ads.map(ad => `
+                <div class="ad-card" data-id="${ad.id}">
+                    <div class="ad-header">
+                        <div>
+                            <div class="ad-name">${ad.name}</div>
+                            <div style="font-size: 0.7rem; color: rgba(255,255,255,0.2);">${ad.size}</div>
+                        </div>
+                        <div class="ad-status">
+                            <span style="font-size: 0.65rem; color: rgba(255,255,255,0.2); margin-right: 0.3rem;">
+                                ${ad.active ? 'Active' : 'Inactive'}
+                            </span>
+                            <div class="toggle-switch ${ad.active ? 'active' : ''}" 
+                                 onclick="toggleAd('${ad.id}')">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ad-code">
+                        <textarea id="adcode_${ad.id}" placeholder="Paste your ad code here...">${ad.code || ''}</textarea>
+                    </div>
+
+                    <div class="ad-preview ${ad.code && ad.code.length > 10 ? 'has-code' : ''}" id="preview_${ad.id}">
+                        ${ad.code && ad.code.length > 10 ? '✅ Code inserted (' + ad.code.length + ' chars)' : '⚠️ No code inserted yet'}
+                    </div>
+
+                    <div class="ad-actions">
+                        <button class="btn btn-primary btn-sm" onclick="saveAd('${ad.id}')">
+                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                            Save
+                        </button>
+                        <button class="btn copy-btn btn-sm" onclick="copyAdCode('${ad.id}')">
+                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                            Copy
+                        </button>
+                        <button class="btn btn-sm" onclick="previewAd('${ad.id}')" style="background: rgba(255,255,255,0.03);">
+                            👁 Preview
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============================================================
+        // ADS FUNCTIONS
+        // ============================================================
+        function toggleAd(id) {
+            const ad = ads.find(a => a.id === id);
+            if (ad) {
+                ad.active = !ad.active;
+                saveAds(ads);
+                renderAds();
+                showToast(`${ad.name} ${ad.active ? 'activated' : 'deactivated'}`, 'success');
+            }
+        }
+
+        function saveAd(id) {
+            const textarea = document.getElementById(`adcode_${id}`);
+            const ad = ads.find(a => a.id === id);
+            if (ad && textarea) {
+                ad.code = textarea.value;
+                saveAds(ads);
+                renderAds();
+                showToast(`${ad.name} code saved!`, 'success');
+            }
+        }
+
+        function saveAllAds() {
+            ads.forEach(ad => {
+                const textarea = document.getElementById(`adcode_${ad.id}`);
+                if (textarea) {
+                    ad.code = textarea.value;
+                }
+            });
+            saveAds(ads);
+            renderAds();
+            showToast('All ad codes saved!', 'success');
+        }
+
+        function resetAllAds() {
+            if (confirm('Reset all ad codes to default?')) {
+                ads = defaultAds.map(a => ({ ...a }));
+                saveAds(ads);
+                renderAds();
+                showToast('All ads reset to default', 'success');
+            }
+        }
+
+        function copyAdCode(id) {
+            const textarea = document.getElementById(`adcode_${id}`);
+            if (!textarea) return;
+
+            const code = textarea.value;
+            if (!code || code.trim() === '') {
+                showToast('No code to copy', 'error');
+                return;
+            }
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(code)
+                    .then(() => {
+                        showToast('Code copied to clipboard!', 'success');
+                        const btn = document.querySelector(`.ad-card[data-id="${id}"] .copy-btn`);
+                        if (btn) {
+                            btn.classList.add('copied');
+                            btn.textContent = '✓ Copied';
+                            setTimeout(() => {
+                                btn.classList.remove('copied');
+                                btn.innerHTML = `
+                                    <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                    Copy
+                                `;
+                            }, 2000);
+                        }
+                    })
+                    .catch(() => {
+                        fallbackCopy(code);
+                    });
+            } else {
+                fallbackCopy(code);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Code copied to clipboard!', 'success');
+            } catch (e) {
+                showToast('Failed to copy', 'error');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function previewAd(id) {
+            const ad = ads.find(a => a.id === id);
+            if (!ad || !ad.code || ad.code.trim() === '') {
+                showToast('No code to preview', 'error');
+                return;
+            }
+
+            // Create a preview modal
+            const previewHtml = `
+                <div style="position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;padding:2rem;" onclick="this.remove()">
+                    <div style="background:#0b0f1a;border-radius:1rem;padding:2rem;max-width:90%;max-height:90%;overflow:auto;border:1px solid rgba(255,255,255,0.06);" onclick="event.stopPropagation()">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                            <h3 style="font-size:1rem;">${ad.name} - Preview</h3>
+                            <button style="background:rgba(255,255,255,0.06);border:none;color:white;font-size:1.5rem;cursor:pointer;padding:0.3rem 0.8rem;border-radius:60px;" onclick="this.closest('div[style]').remove()">×</button>
+                        </div>
+                        <div style="background:rgba(0,0,0,0.3);border-radius:0.8rem;padding:1rem;min-height:100px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04);">
+                            ${ad.code}
+                        </div>
+                        <div style="margin-top:0.5rem;font-size:0.6rem;color:rgba(255,255,255,0.15);text-align:center;">
+                            Code length: ${ad.code.length} characters
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const div = document.createElement('div');
+            div.innerHTML = previewHtml;
+            document.body.appendChild(div.firstElementChild);
+        }
+
+        // ============================================================
+        // WALLPAPER DATA
         // ============================================================
         const STORAGE_KEY = 'wallpaper_data';
 
@@ -715,21 +1175,12 @@
         let nextId = wallpapers.length > 0 ? Math.max(...wallpapers.map(w => w.id)) + 1 : 1;
 
         // ============================================================
-        // DOM REFS
+        // RENDER WALLPAPERS
         // ============================================================
         const galleryGrid = document.getElementById('galleryGrid');
         const stats = document.getElementById('stats');
         const wallpaperCount = document.getElementById('wallpaperCount');
-        const uploadForm = document.getElementById('uploadForm');
-        const imageFile = document.getElementById('imageFile');
-        const imageTitle = document.getElementById('imageTitle');
-        const imageCategory = document.getElementById('imageCategory');
-        const uploadArea = document.getElementById('uploadArea');
-        const toast = document.getElementById('toast');
 
-        // ============================================================
-        // RENDER GALLERY
-        // ============================================================
         function renderGallery() {
             if (wallpapers.length === 0) {
                 galleryGrid.innerHTML = `
@@ -748,12 +1199,12 @@
                             <div class="title">${wp.title}</div>
                             <div class="category">${wp.category}</div>
                             <div class="card-actions">
-                                <button class="btn btn-danger" onclick="deleteWallpaper(${wp.id})">
-                                    <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                <button class="btn btn-danger btn-sm" onclick="deleteWallpaper(${wp.id})">
+                                    <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
                                     Delete
                                 </button>
-                                <button class="btn" onclick="editWallpaper(${wp.id})">
-                                    <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                                <button class="btn btn-sm" onclick="editWallpaper(${wp.id})">
+                                    <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
                                     Edit
                                 </button>
                             </div>
@@ -768,8 +1219,14 @@
         }
 
         // ============================================================
-        // UPLOAD WALLPAPER
+        // WALLPAPER FUNCTIONS
         // ============================================================
+        const uploadForm = document.getElementById('uploadForm');
+        const imageFile = document.getElementById('imageFile');
+        const imageTitle = document.getElementById('imageTitle');
+        const imageCategory = document.getElementById('imageCategory');
+        const uploadArea = document.getElementById('uploadArea');
+
         uploadForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -803,7 +1260,7 @@
                 saveWallpapers(wallpapers);
                 renderGallery();
                 resetForm();
-                showToast(`Wallpaper "${title}" uploaded successfully!`, 'success');
+                showToast(`Wallpaper "${title}" uploaded!`, 'success');
             };
 
             reader.onerror = function() {
@@ -813,9 +1270,6 @@
             reader.readAsDataURL(file);
         });
 
-        // ============================================================
-        // DELETE WALLPAPER
-        // ============================================================
         function deleteWallpaper(id) {
             if (confirm('Delete this wallpaper?')) {
                 wallpapers = wallpapers.filter(w => w.id !== id);
@@ -825,9 +1279,6 @@
             }
         }
 
-        // ============================================================
-        // EDIT WALLPAPER
-        // ============================================================
         function editWallpaper(id) {
             const wp = wallpapers.find(w => w.id === id);
             if (!wp) return;
@@ -845,56 +1296,12 @@
             showToast('Wallpaper updated!', 'success');
         }
 
-        // ============================================================
-        // CLEAR ALL
-        // ============================================================
-        function clearAllWallpapers() {
-            if (wallpapers.length === 0) {
-                showToast('No wallpapers to clear', 'error');
-                return;
-            }
-            if (confirm('Delete ALL wallpapers? This cannot be undone!')) {
-                wallpapers = [];
-                saveWallpapers(wallpapers);
-                renderGallery();
-                showToast('All wallpapers cleared', 'success');
-            }
-        }
-
-        // ============================================================
-        // EXPORT DATA
-        // ============================================================
-        function exportData() {
-            if (wallpapers.length === 0) {
-                showToast('No data to export', 'error');
-                return;
-            }
-
-            const dataStr = JSON.stringify(wallpapers, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'wallpapers_backup.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showToast('Data exported successfully!', 'success');
-        }
-
-        // ============================================================
-        // RESET FORM
-        // ============================================================
         function resetForm() {
             imageFile.value = '';
             imageTitle.value = '';
             imageCategory.value = 'Nature';
         }
 
-        // ============================================================
-        // DRAG AND DROP
-        // ============================================================
         uploadArea.addEventListener('dragover', function(e) {
             e.preventDefault();
             this.classList.add('dragover');
@@ -919,6 +1326,7 @@
         // ============================================================
         // TOAST
         // ============================================================
+        const toast = document.getElementById('toast');
         let toastTimeout;
 
         function showToast(message, type = 'info') {
@@ -929,20 +1337,18 @@
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3500);
+            }, 3000);
         }
 
         // ============================================================
         // INIT
         // ============================================================
-        // Check session on load
         if (checkSession()) {
             showAdmin();
         } else {
             showLogin();
         }
 
-        // Enter key on password field
         passwordInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 loginForm.dispatchEvent(new Event('submit'));
@@ -950,19 +1356,16 @@
         });
 
         // ============================================================
-        // NOTES:
+        // EXPORT ADS FUNCTION (for use in other pages)
         // ============================================================
-        /*
-        
-        
-        To change password:
-        1. Login to admin panel
-        2. Click "Change Password" link
-        3. Enter current password, then new password
-        
-        Password is stored in localStorage.
-        For production, use a real backend with hashed passwords.
-        */
+        function getAdCode(id) {
+            const ad = ads.find(a => a.id === id);
+            return ad && ad.active ? ad.code : '';
+        }
+
+        // Export to global for use in other pages
+        window.getAdCode = getAdCode;
+        window.adsData = ads;
     </script>
 </body>
 </html>
