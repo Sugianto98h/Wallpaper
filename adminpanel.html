@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallpaper Admin Panel</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0b0f1a;
+            color: #eef4ff;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #7abfff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .header-actions .stats {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: #eef4ff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: rgba(70, 150, 255, 0.25);
+            border-color: rgba(70, 150, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: rgba(70, 150, 255, 0.4);
+            border-color: rgba(70, 150, 255, 0.6);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 80, 200, 0.3);
+        }
+
+        .btn-danger {
+            background: rgba(255, 70, 70, 0.15);
+            border-color: rgba(255, 70, 70, 0.2);
+            color: #ff6b6b;
+        }
+
+        .btn-danger:hover {
+            background: rgba(255, 70, 70, 0.25);
+            border-color: rgba(255, 70, 70, 0.4);
+            transform: scale(1.02);
+        }
+
+        .btn-success {
+            background: rgba(70, 220, 130, 0.15);
+            border-color: rgba(70, 220, 130, 0.2);
+            color: #6bff9e;
+        }
+
+        .btn-success:hover {
+            background: rgba(70, 220, 130, 0.25);
+            border-color: rgba(70, 220, 130, 0.4);
+            transform: scale(1.02);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* ===== UPLOAD FORM ===== */
+        .upload-area {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: rgba(70, 150, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .upload-area.dragover {
+            border-color: rgba(70, 150, 255, 0.5);
+            background: rgba(70, 150, 255, 0.05);
+        }
+
+        .upload-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .upload-form .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.7rem 1rem;
+            border-radius: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #eef4ff;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: rgba(70, 150, 255, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .form-group input[type="file"] {
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .form-group input[type="file"]::file-selector-button {
+            padding: 0.4rem 1rem;
+            border-radius: 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            color: #eef4ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .form-group input[type="file"]::file-selector-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== GALLERY GRID (ADMIN) ===== */
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .gallery-header .count {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* ===== WALLPAPER CARD (ADMIN) ===== */
+        .wallpaper-card {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 1.2rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .wallpaper-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .wallpaper-card .thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #1a1f2e;
+        }
+
+        .wallpaper-card .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wallpaper-card .info {
+            padding: 1rem 1.2rem 1.2rem;
+        }
+
+        .wallpaper-card .info .title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .wallpaper-card .info .category {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 0.8rem;
+        }
+
+        .wallpaper-card .card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .wallpaper-card .card-actions .btn {
+            flex: 1;
+            justify-content: center;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            fill: rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(20, 30, 50, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #eef4ff;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            z-index: 2000;
+            pointer-events: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            border-color: rgba(70, 220, 130, 0.3);
+        }
+
+        .toast.error {
+            border-color: rgba(255, 70, 70, 0.3);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .upload-form {
+                grid-template-columns: 1fr;
+            }
+            .upload-form .full-width {
+                grid-column: 1;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .header-actions {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .toast {
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                border-radius: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <h1>Wallpaper Admin Panel</h1>
+            <div class="header-actions">
+                <span class="stats" id="stats">0 wallpapers</span>
+                <button class="btn btn-danger" onclick="clearAllWallpapers()">
+                    <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                    Clear All
+                </button>
+                <button class="btn btn-success" onclick="exportData()">
+                    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    Export JSON
+                </button>
+            </div>
+        </header>
+
+        <!-- ===== UPLOAD FORM ===== -->
+        <div class="upload-area" id="uploadArea">
+            <form class="upload-form" id="uploadForm">
+                <div class="form-group full-width">
+                    <label>Upload Image</label>
+                    <input type="file" id="imageFile" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="imageTitle" placeholder="e.g., Golden Sunset" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="imageCategory">
+                        <option value="Nature">Nature</option>
+                        <option value="Urban">Urban</option>
+                        <option value="Astro">Astro</option>
+                        <option value="Abstract">Abstract</option>
+                        <option value="Minimal">Minimal</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="resetForm()">Reset</button>
+                    <button type="submit" class="btn btn-primary" id="uploadBtn">
+                        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        Upload Wallpaper
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ===== GALLERY ===== -->
+        <div class="gallery-header">
+            <h2>Wallpaper Collection</h2>
+            <span class="count" id="wallpaperCount">0 items</span>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Rendered by JavaScript -->
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ============================================================
+        // DATA STORAGE (LocalStorage)
+        // ============================================================
+        const STORAGE_KEY = 'wallpaper_data';
+
+        function loadWallpapers() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function saveWallpapers(wallpapers) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(wallpapers));
+        }
+
+        let wallpapers = loadWallpapers();
+        let nextId = wallpapers.length > 0 ? Math.max(...wallpapers.map(w => w.id)) + 1 : 1;
+
+        // ============================================================
+        // DOM REFS
+        // ============================================================
+        const galleryGrid = document.getElementById('galleryGrid');
+        const stats = document.getElementById('stats');
+        const wallpaperCount = document.getElementById('wallpaperCount');
+        const uploadForm = document.getElementById('uploadForm');
+        const imageFile = document.getElementById('imageFile');
+        const imageTitle = document.getElementById('imageTitle');
+        const imageCategory = document.getElementById('imageCategory');
+        const uploadArea = document.getElementById('uploadArea');
+        const toast = document.getElementById('toast');
+
+        // ============================================================
+        // RENDER GALLERY
+        // ============================================================
+        function renderGallery() {
+            if (wallpapers.length === 0) {
+                galleryGrid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4-3h2v13h-2z"/></svg>
+                        <h3>No wallpapers yet</h3>
+                        <p>Upload your first wallpaper using the form above</p>
+                    </div>
+                `;
+            } else {
+                galleryGrid.innerHTML = wallpapers.map(wp => `
+                    <div class="wallpaper-card" data-id="${wp.id}">
+                        <div class="thumb">
+                            <img src="${wp.image}" alt="${wp.title}" loading="lazy">
+                        </div>
+                        <div class="info">
+                            <div class="title">${wp.title}</div>
+                            <div class="category">${wp.category}</div>
+                            <div class="card-actions">
+                                <button class="btn btn-danger" onclick="deleteWallpaper(${wp.id})">
+                                    <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                    Delete
+                                </button>
+                                <button class="btn" onclick="editWallpaper(${wp.id})">
+                                    <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Update stats
+            const count = wallpapers.length;
+            stats.textContent = `${count} wallpapers`;
+            wallpaperCount.textContent = `${count} items`;
+        }
+
+        // ============================================================
+        // UPLOAD WALLPAPER (with image to Base64)
+        // ============================================================
+        uploadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const file = imageFile.files[0];
+            if (!file) {
+                showToast('Please select an image', 'error');
+                return;
+            }
+
+            const title = imageTitle.value.trim();
+            if (!title) {
+                showToast('Please enter a title', 'error');
+                return;
+            }
+
+            const category = imageCategory.value;
+
+            // Convert image to Base64
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const base64 = event.target.result;
+
+                const newWallpaper = {
+                    id: nextId++,
+                    title: title,
+                    category: category,
+                    image: base64,
+                    download: base64 // same image for download
+                };
+
+                wallpapers.push(newWallpaper);
+                saveWallpapers(wallpapers);
+                renderGallery();
+                resetForm();
+                showToast(`Wallpaper "${title}" uploaded successfully!`, 'success');
+            };
+
+            reader.onerror = function() {
+                showToast('Failed to read image file', 'error');
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        // ============================================================
+        // DELETE WALLPAPER
+        // ============================================================
+        function deleteWallpaper(id) {
+            if (confirm('Delete this wallpaper?')) {
+                wallpapers = wallpapers.filter(w => w.id !== id);
+                saveWallpapers(wallpapers);
+                renderGallery();
+                showToast('Wallpaper deleted', 'success');
+            }
+        }
+
+        // ============================================================
+        // EDIT WALLPAPER (quick edit: just title and category)
+        // ============================================================
+        function editWallpaper(id) {
+            const wp = wallpapers.find(w => w.id === id);
+            if (!wp) return;
+
+            const newTitle = prompt('Edit title:', wp.title);
+            if (newTitle === null) return; // cancelled
+
+            const newCategory = prompt('Edit category:', wp.category);
+            if (newCategory === null) return;
+
+            wp.title = newTitle.trim() || wp.title;
+            wp.category = newCategory.trim() || wp.category;
+            saveWallpapers(wallpapers);
+            renderGallery();
+            showToast(`Wallpaper updated!`, 'success');
+        }
+
+        // ============================================================
+        // CLEAR ALL
+        // ============================================================
+        function clearAllWallpapers() {
+            if (wallpapers.length === 0) {
+                showToast('No wallpapers to clear', 'error');
+                return;
+            }
+            if (confirm('Delete ALL wallpapers? This cannot be undone!')) {
+                wallpapers = [];
+                saveWallpapers(wallpapers);
+                renderGallery();
+                showToast('All wallpapers cleared', 'success');
+            }
+        }
+
+        // ============================================================
+        // EXPORT DATA
+        // ============================================================
+        function exportData() {
+            if (wallpapers.length === 0) {
+                showToast('No data to export', 'error');
+                return;
+            }
+
+            const dataStr = JSON.stringify(wallpapers, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'wallpapers_backup.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Data exported successfully!', 'success');
+        }
+
+        // ============================================================
+        // RESET FORM
+        // ============================================================
+        function resetForm() {
+            imageFile.value = '';
+            imageTitle.value = '';
+            imageCategory.value = 'Nature';
+        }
+
+        // ============================================================
+        // DRAG AND DROP SUPPORT
+        // ============================================================
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                imageFile.files = files;
+                // Auto-fill title from filename
+                const fileName = files[0].name.replace(/\.[^/.]+$/, ''); // remove extension
+                imageTitle.value = fileName.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            }
+        });
+
+        // ============================================================
+        // TOAST
+        // ============================================================
+        let toastTimeout;
+
+        function showToast(message, type = 'info') {
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            // Force reflow
+            void toast.offsetWidth;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        renderGallery();
+
+        // ============================================================
+        // NOTES:
+        // ============================================================
+        /*
+        This admin panel uses localStorage to store wallpapers as Base64 data.
+        
+        To make it production-ready:
+        1. Replace localStorage with a backend API (Node.js, PHP, etc.)
+        2. Store images on a server/filesystem instead of Base64
+        3. Add user authentication
+        
+        For the gallery page (public view), you would:
+        1. Fetch wallpapers from your backend API
+        2. Display them in a similar grid
+        3. Use the same image URLs served from your server
+        */
+    </script>
+
+</body>
+</html>
