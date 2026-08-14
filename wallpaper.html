@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wallpaper Gallery · Free Download</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -13,14 +12,13 @@
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background: #0b0f1a;
             color: #eef4ff;
             min-height: 100vh;
             padding: 2rem 1.5rem;
         }
 
-        /* ===== HEADER ===== */
         .header {
             max-width: 1200px;
             margin: 0 auto 3rem;
@@ -53,7 +51,6 @@
             margin-top: 0.8rem;
         }
 
-        /* ===== GALLERY GRID ===== */
         .gallery {
             max-width: 1200px;
             margin: 0 auto;
@@ -62,7 +59,6 @@
             gap: 2rem;
         }
 
-        /* ===== WALLPAPER CARD ===== */
         .wallpaper-card {
             background: rgba(255, 255, 255, 0.04);
             border-radius: 1.5rem;
@@ -78,7 +74,6 @@
             border-color: rgba(255, 255, 255, 0.15);
         }
 
-        /* ===== THUMBNAIL ===== */
         .wallpaper-thumb {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -125,7 +120,6 @@
             color: white;
         }
 
-        /* ===== WALLPAPER INFO ===== */
         .wallpaper-info {
             padding: 1.2rem 1.2rem 1.5rem;
         }
@@ -142,7 +136,6 @@
             margin-bottom: 1rem;
         }
 
-        /* ===== BUTTON GROUP ===== */
         .btn-group {
             display: flex;
             gap: 0.6rem;
@@ -198,7 +191,6 @@
             flex-shrink: 0;
         }
 
-        /* ===== MODAL PREVIEW ===== */
         .modal {
             display: none;
             position: fixed;
@@ -254,7 +246,6 @@
             transform: rotate(90deg);
         }
 
-        /* ===== TOAST NOTIFICATION ===== */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -279,7 +270,18 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* ===== RESPONSIVE ===== */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .empty-state h3 {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 1rem;
@@ -312,18 +314,14 @@
     </style>
 </head>
 <body>
-
-    <!-- ===== HEADER ===== -->
     <header class="header">
         <h1>Wallpaper Gallery</h1>
         <p>Click image to preview · Download or Share</p>
-        <div class="badge">6 Free HD Wallpapers</div>
+        <div class="badge">Free HD Wallpapers</div>
     </header>
 
-    <!-- ===== GALLERY ===== -->
     <div class="gallery" id="gallery"></div>
 
-    <!-- ===== MODAL PREVIEW ===== -->
     <div class="modal" id="modal">
         <button class="modal-close" id="modalClose">×</button>
         <div class="modal-content">
@@ -331,54 +329,22 @@
         </div>
     </div>
 
-    <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"></div>
 
     <script>
-        // ============================================================
-        // WALLPAPER DATA — REPLACE WITH YOUR OWN IMAGES
-        // ============================================================
-        const wallpapers = [{
-            id: 1,
-            title: 'Golden Sunset',
-            category: 'Nature',
-            image: 'https://picsum.photos/seed/sunset/800/450',
-            download: 'https://picsum.photos/seed/sunset/1920/1080'
-        }, {
-            id: 2,
-            title: 'Misty Mountains',
-            category: 'Nature',
-            image: 'https://picsum.photos/seed/mountain/800/450',
-            download: 'https://picsum.photos/seed/mountain/1920/1080'
-        }, {
-            id: 3,
-            title: 'Night City',
-            category: 'Urban',
-            image: 'https://picsum.photos/seed/city/800/450',
-            download: 'https://picsum.photos/seed/city/1920/1080'
-        }, {
-            id: 4,
-            title: 'Tropical Forest',
-            category: 'Nature',
-            image: 'https://picsum.photos/seed/forest/800/450',
-            download: 'https://picsum.photos/seed/forest/1920/1080'
-        }, {
-            id: 5,
-            title: 'Starry Sky',
-            category: 'Astro',
-            image: 'https://picsum.photos/seed/stars/800/450',
-            download: 'https://picsum.photos/seed/stars/1920/1080'
-        }, {
-            id: 6,
-            title: 'Exotic Beach',
-            category: 'Nature',
-            image: 'https://picsum.photos/seed/beach/800/450',
-            download: 'https://picsum.photos/seed/beach/1920/1080'
-        }];
+        // Load data from localStorage (shared with admin panel)
+        const STORAGE_KEY = 'wallpaper_data';
 
-        // ============================================================
-        // RENDER GALLERY
-        // ============================================================
+        function loadWallpapers() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch {
+                return [];
+            }
+        }
+
+        const wallpapers = loadWallpapers();
         const gallery = document.getElementById('gallery');
         const modal = document.getElementById('modal');
         const modalImage = document.getElementById('modalImage');
@@ -386,6 +352,16 @@
         const toast = document.getElementById('toast');
 
         function renderGallery() {
+            if (wallpapers.length === 0) {
+                gallery.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No wallpapers available</h3>
+                        <p>Check back later for new wallpapers</p>
+                    </div>
+                `;
+                return;
+            }
+
             gallery.innerHTML = wallpapers.map(wp => `
                 <div class="wallpaper-card">
                     <div class="wallpaper-thumb" onclick="openModal('${wp.image}')">
@@ -412,9 +388,6 @@
             `).join('');
         }
 
-        // ============================================================
-        // MODAL FUNCTIONS
-        // ============================================================
         function openModal(src) {
             modalImage.src = src;
             modal.classList.add('active');
@@ -434,9 +407,6 @@
             if (e.key === 'Escape') closeModal();
         });
 
-        // ============================================================
-        // SHARE FUNCTION
-        // ============================================================
         function shareWallpaper(title, imageUrl) {
             const shareData = {
                 title: title,
@@ -458,19 +428,16 @@
         }
 
         function fallbackShare(title, imageUrl) {
-            // Copy image URL to clipboard
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(imageUrl)
                     .then(() => {
                         showToast('Image URL copied to clipboard!');
                     })
                     .catch(() => {
-                        // Manual fallback: open in new window
                         window.open(imageUrl, '_blank');
                         showToast('Opening image in new tab');
                     });
             } else {
-                // Ultimate fallback
                 const textarea = document.createElement('textarea');
                 textarea.value = imageUrl;
                 document.body.appendChild(textarea);
@@ -486,9 +453,6 @@
             }
         }
 
-        // ============================================================
-        // TOAST NOTIFICATION
-        // ============================================================
         let toastTimeout;
 
         function showToast(message) {
@@ -500,45 +464,7 @@
             }, 3000);
         }
 
-        // ============================================================
-        // INIT
-        // ============================================================
         renderGallery();
-
-        // ============================================================
-        // HOW TO REPLACE IMAGES:
-        // ============================================================
-        /*
-        Replace the 'image' and 'download' URLs in the wallpapers array above.
-        
-        Option 1: Use local folder
-        ---------------------------
-        Create an 'images' folder and add your files:
-        /images/
-            wallpaper1.jpg
-            wallpaper2.jpg
-        
-        Then write:
-        image: 'images/wallpaper1.jpg',
-        download: 'images/wallpaper1.jpg'
-        
-        Option 2: Use image hosting
-        ----------------------------
-        Upload to Imgur, Postimages, or similar service
-        and use the direct image link.
-        
-        Option 3: Add more wallpapers
-        -----------------------------
-        Copy this block and fill in your data:
-        {
-            id: 7,
-            title: 'Your Title',
-            category: 'Category',
-            image: 'your-image-url.jpg',
-            download: 'your-download-url.jpg'
-        }
-        */
     </script>
-
 </body>
 </html>
