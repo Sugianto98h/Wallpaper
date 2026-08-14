@@ -24,7 +24,6 @@
             margin: 0 auto;
         }
 
-        /* ===== LOGIN ===== */
         .login-container {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -124,7 +123,6 @@
             font-size: 0.65rem;
         }
 
-        /* ===== ADMIN PANEL ===== */
         .admin-panel {
             display: none;
         }
@@ -133,7 +131,6 @@
             display: block;
         }
 
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -266,7 +263,6 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
-        /* ===== TABS ===== */
         .tabs {
             display: flex;
             gap: 0.5rem;
@@ -305,7 +301,6 @@
             display: block;
         }
 
-        /* ===== WALLPAPER MANAGEMENT ===== */
         .upload-area {
             background: rgba(255, 255, 255, 0.03);
             border: 2px dashed rgba(255, 255, 255, 0.06);
@@ -472,7 +467,6 @@
             margin-bottom: 0.3rem;
         }
 
-        /* ===== ADS MANAGEMENT ===== */
         .ads-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -642,7 +636,6 @@
             color: #6bff9e;
         }
 
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 1.5rem;
@@ -675,7 +668,19 @@
             border-color: rgba(255, 70, 70, 0.2);
         }
 
-        /* ===== RESPONSIVE ===== */
+        .debug-box {
+            background: rgba(255, 70, 70, 0.05);
+            border: 1px solid rgba(255, 70, 70, 0.1);
+            border-radius: 0.8rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: monospace;
+            max-height: 200px;
+            overflow: auto;
+        }
+
         @media (max-width: 768px) {
             .upload-form {
                 grid-template-columns: 1fr;
@@ -819,10 +824,19 @@
                         <button class="btn btn-sm" onclick="resetAllAds()" style="margin-left: 0.5rem;">
                             Reset All
                         </button>
+                        <button class="btn btn-sm" onclick="debugAds()" style="margin-left: 0.5rem; background: rgba(255,200,0,0.1); border-color: rgba(255,200,0,0.2); color: #ffd700;">
+                            🔍 Debug
+                        </button>
                     </div>
                 </div>
 
                 <div class="ads-grid" id="adsGrid"></div>
+
+                <!-- ===== DEBUG BOX ===== -->
+                <div class="debug-box" id="debugBox">
+                    <strong>📋 Debug Info:</strong><br>
+                    Klik tombol "Debug" untuk melihat data iklan di localStorage
+                </div>
             </div>
         </div>
     </div>
@@ -945,37 +959,44 @@
         const ADS_STORAGE_KEY = 'ads_codes';
 
         const defaultAds = [
-            { id: 'popunder', name: 'Popunder', code: 'Popunder_1', size: 'Popunder', active: true },
-            { id: 'socialbar', name: 'Social Bar', code: 'SocialBar_1', size: 'Social Bar', active: true },
-            { id: 'smartlink', name: 'Smartlink', code: 'Smartlink_1', size: 'Smartlink', active: true },
-            { id: 'native', name: 'Native Banner', code: 'NativeBanner_1', size: 'Native', active: true },
-            { id: 'banner468', name: 'Banner 468x60', code: '468x60_1', size: '468×60', active: true },
-            { id: 'banner300', name: 'Banner 300x250', code: '300x250_1', size: '300×250', active: true },
-            { id: 'banner160x600', name: 'Banner 160x600', code: '160x600_1', size: '160×600', active: true },
-            { id: 'banner160x300', name: 'Banner 160x300', code: '160x300_1', size: '160×300', active: true },
-            { id: 'banner320', name: 'Banner 320x50', code: '320x50_1', size: '320×50', active: true },
-            { id: 'banner728', name: 'Banner 728x90', code: '728x90_1', size: '728×90', active: true }
+            { id: 'popunder', name: 'Popunder', code: '', size: 'Popunder', active: false },
+            { id: 'socialbar', name: 'Social Bar', code: '', size: 'Social Bar', active: false },
+            { id: 'smartlink', name: 'Smartlink', code: '', size: 'Smartlink', active: false },
+            { id: 'native', name: 'Native Banner', code: '', size: 'Native', active: false },
+            { id: 'banner468', name: 'Banner 468x60', code: '', size: '468×60', active: false },
+            { id: 'banner300', name: 'Banner 300x250', code: '', size: '300×250', active: false },
+            { id: 'banner160x600', name: 'Banner 160x600', code: '', size: '160×600', active: false },
+            { id: 'banner160x300', name: 'Banner 160x300', code: '', size: '160×300', active: false },
+            { id: 'banner320', name: 'Banner 320x50', code: '', size: '320×50', active: false },
+            { id: 'banner728', name: 'Banner 728x90', code: '', size: '728×90', active: false }
         ];
 
         function loadAds() {
             try {
                 const data = localStorage.getItem(ADS_STORAGE_KEY);
+                console.log('📦 Raw localStorage (ads):', data);
                 if (data) {
                     const parsed = JSON.parse(data);
-                    // Merge with defaults to ensure all fields exist
-                    return defaultAds.map(def => {
+                    console.log('📦 Parsed ads:', parsed);
+                    // Merge dengan default untuk memastikan semua field ada
+                    const merged = defaultAds.map(def => {
                         const existing = parsed.find(p => p.id === def.id);
                         return existing ? { ...def, ...existing } : def;
                     });
+                    console.log('📦 Merged ads:', merged);
+                    return merged;
                 }
+                console.log('⚠️ No ads data found, using defaults');
                 return defaultAds;
-            } catch {
+            } catch (e) {
+                console.error('❌ Error loading ads:', e);
                 return defaultAds;
             }
         }
 
         function saveAds(ads) {
             localStorage.setItem(ADS_STORAGE_KEY, JSON.stringify(ads));
+            console.log('💾 Ads saved to localStorage:', ads);
         }
 
         let ads = loadAds();
@@ -995,7 +1016,7 @@
                         </div>
                         <div class="ad-status">
                             <span style="font-size: 0.65rem; color: rgba(255,255,255,0.2); margin-right: 0.3rem;">
-                                ${ad.active ? 'Active' : 'Inactive'}
+                                ${ad.active ? '✅ Active' : '⛔ Inactive'}
                             </span>
                             <div class="toggle-switch ${ad.active ? 'active' : ''}" 
                                  onclick="toggleAd('${ad.id}')">
@@ -1005,7 +1026,7 @@
                     </div>
 
                     <div class="ad-code">
-                        <textarea id="adcode_${ad.id}" placeholder="Paste your ad code here...">${ad.code || ''}</textarea>
+                        <textarea id="adcode_${ad.id}" placeholder="Paste your ad code here..." style="min-height:80px;">${ad.code || ''}</textarea>
                     </div>
 
                     <div class="ad-preview ${ad.code && ad.code.length > 10 ? 'has-code' : ''}" id="preview_${ad.id}">
@@ -1027,6 +1048,52 @@
                     </div>
                 </div>
             `).join('');
+
+            // Update debug box
+            updateDebug();
+        }
+
+        // ============================================================
+        // DEBUG FUNCTION
+        // ============================================================
+        function debugAds() {
+            const raw = localStorage.getItem(ADS_STORAGE_KEY);
+            const debugBox = document.getElementById('debugBox');
+
+            let html = '<strong>📋 Debug Info:</strong><br>';
+
+            if (raw) {
+                try {
+                    const parsed = JSON.parse(raw);
+                    html += `✅ Data ditemukan di localStorage<br>`;
+                    html += `📦 Jumlah iklan: ${parsed.length}<br><br>`;
+                    parsed.forEach((ad, i) => {
+                        const status = ad.active ? '🟢 ACTIVE' : '🔴 INACTIVE';
+                        const hasCode = ad.code && ad.code.length > 10 ? '✅ Ada kode' : '❌ Tidak ada kode';
+                        html += `${i+1}. ${ad.name} → ${status} | ${hasCode}<br>`;
+                        if (ad.code && ad.code.length > 0) {
+                            html += `   📝 Kode: ${ad.code.substring(0, 50)}${ad.code.length > 50 ? '...' : ''}<br>`;
+                        }
+                    });
+                } catch (e) {
+                    html += `❌ Error parsing data: ${e.message}`;
+                }
+            } else {
+                html += `❌ Tidak ada data di localStorage!<br>`;
+                html += `💡 Pastikan Anda sudah menyimpan iklan di tab "Ad Codes"`;
+            }
+
+            html += `<br><span style="color:rgba(255,255,255,0.2);font-size:0.6rem;">Key: ${ADS_STORAGE_KEY}</span>`;
+            debugBox.innerHTML = html;
+            showToast('Debug info updated!', 'info');
+        }
+
+        function updateDebug() {
+            // Auto update debug if already open
+            const debugBox = document.getElementById('debugBox');
+            if (debugBox.innerHTML.includes('Debug Info')) {
+                debugAds();
+            }
         }
 
         // ============================================================
@@ -1038,7 +1105,7 @@
                 ad.active = !ad.active;
                 saveAds(ads);
                 renderAds();
-                showToast(`${ad.name} ${ad.active ? 'activated' : 'deactivated'}`, 'success');
+                showToast(`${ad.name} ${ad.active ? 'activated ✅' : 'deactivated ⛔'}`, 'success');
             }
         }
 
@@ -1049,7 +1116,7 @@
                 ad.code = textarea.value;
                 saveAds(ads);
                 renderAds();
-                showToast(`${ad.name} code saved!`, 'success');
+                showToast(`${ad.name} code saved! ✅`, 'success');
             }
         }
 
@@ -1062,7 +1129,7 @@
             });
             saveAds(ads);
             renderAds();
-            showToast('All ad codes saved!', 'success');
+            showToast('All ad codes saved! ✅', 'success');
         }
 
         function resetAllAds() {
@@ -1087,19 +1154,7 @@
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(code)
                     .then(() => {
-                        showToast('Code copied to clipboard!', 'success');
-                        const btn = document.querySelector(`.ad-card[data-id="${id}"] .copy-btn`);
-                        if (btn) {
-                            btn.classList.add('copied');
-                            btn.textContent = '✓ Copied';
-                            setTimeout(() => {
-                                btn.classList.remove('copied');
-                                btn.innerHTML = `
-                                    <svg viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                                    Copy
-                                `;
-                            }, 2000);
-                        }
+                        showToast('Code copied to clipboard! 📋', 'success');
                     })
                     .catch(() => {
                         fallbackCopy(code);
@@ -1116,7 +1171,7 @@
             textarea.select();
             try {
                 document.execCommand('copy');
-                showToast('Code copied to clipboard!', 'success');
+                showToast('Code copied to clipboard! 📋', 'success');
             } catch (e) {
                 showToast('Failed to copy', 'error');
             }
@@ -1130,7 +1185,6 @@
                 return;
             }
 
-            // Create a preview modal
             const previewHtml = `
                 <div style="position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;padding:2rem;" onclick="this.remove()">
                     <div style="background:#0b0f1a;border-radius:1rem;padding:2rem;max-width:90%;max-height:90%;overflow:auto;border:1px solid rgba(255,255,255,0.06);" onclick="event.stopPropagation()">
@@ -1260,7 +1314,7 @@
                 saveWallpapers(wallpapers);
                 renderGallery();
                 resetForm();
-                showToast(`Wallpaper "${title}" uploaded!`, 'success');
+                showToast(`Wallpaper "${title}" uploaded! ✅`, 'success');
             };
 
             reader.onerror = function() {
@@ -1363,9 +1417,12 @@
             return ad && ad.active ? ad.code : '';
         }
 
-        // Export to global for use in other pages
         window.getAdCode = getAdCode;
         window.adsData = ads;
+
+        console.log('✅ Admin panel loaded!');
+        console.log('📢 Ads data:', ads);
+        console.log('💡 Click "Debug" button to check localStorage');
     </script>
 </body>
 </html>
