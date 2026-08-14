@@ -36,6 +36,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 30px;
         }
 
         .ad-container .ad-label {
@@ -53,6 +54,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 100%;
+        }
+
+        .ad-container .ad-placeholder iframe,
+        .ad-container .ad-placeholder script {
+            display: block;
+        }
+
+        .ad-container .ad-placeholder img {
+            max-width: 100%;
+            height: auto;
         }
 
         .ad-728x90 { min-height: 90px; width: 100%; max-width: 728px; margin: 0 auto; }
@@ -299,7 +311,6 @@
             flex-shrink: 0;
         }
 
-        /* ===== AD IN GALLERY GRID ===== */
         .ad-grid-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -326,7 +337,6 @@
             margin-top: 0.3rem;
         }
 
-        /* ===== MODAL ===== */
         .modal {
             display: none;
             position: fixed;
@@ -523,102 +533,94 @@
             .header h1 {
                 font-size: 1.6rem;
             }
-            .wallpaper-info .title {
-                font-size: 0.85rem;
-            }
-            .btn-group .btn {
-                font-size: 0.65rem;
-                padding: 0.3rem 0.4rem;
-            }
-            .modal-close {
-                width: 36px;
-                height: 36px;
-                font-size: 1.2rem;
-            }
-            .modal-download-btn {
-                bottom: 1rem;
-                right: 1rem;
-                padding: 0.4rem 1rem;
-                font-size: 0.7rem;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ===== POPUNDER ===== -->
-        <div class="ad-container ad-popunder">
-            <div class="ad-label">Popunder</div>
-            <div class="ad-placeholder">[ Popunder_1 ]</div>
-        </div>
-
-        <!-- ===== SOCIAL BAR ===== -->
-        <div class="ad-container ad-socialbar">
-            <div class="ad-label">Social Bar</div>
-            <div class="ad-placeholder">[ SocialBar_1 ]</div>
-        </div>
-
-        <!-- ===== SMARTLINK ===== -->
-        <div class="ad-container ad-smartlink">
-            <div class="ad-label">Smartlink</div>
-            <div class="ad-placeholder">[ Smartlink_1 ]</div>
-        </div>
-
-        <!-- ===== BANNER 728x90 ===== -->
-        <div class="ad-container ad-728x90">
-            <div class="ad-label">Banner 728x90</div>
-            <div class="ad-placeholder">[ 728x90_1 ]</div>
-        </div>
-
-        <a href="index.html" class="back-btn">← Back to Home</a>
-
-        <header class="header">
-            <h1>Wallpaper Gallery</h1>
-            <p>Click image to preview · Download or Share</p>
-            <div class="badge">Free HD Wallpapers</div>
-        </header>
-
-        <!-- ===== NATIVE BANNER ===== -->
-        <div class="ad-container ad-native">
-            <div class="ad-label">Native Banner</div>
-            <div class="ad-placeholder" style="min-height: 50px;">[ NativeBanner_1 ]</div>
-        </div>
-
-        <div class="ad-sidebar-wrapper">
-            <div>
-                <div class="gallery" id="gallery"></div>
+        <!-- ===== ADS SECTION ===== -->
+        <div id="adsContainer">
+            <!-- Popunder -->
+            <div class="ad-container ad-popunder" id="ad-popunder">
+                <div class="ad-label">Popunder</div>
+                <div class="ad-placeholder" id="adcode-popunder"></div>
             </div>
-            <div>
-                <!-- ===== BANNER 160x600 ===== -->
-                <div class="ad-container ad-160x600">
-                    <div class="ad-label">Banner 160x600</div>
-                    <div class="ad-placeholder" style="min-height: 350px;">[ 160x600_1 ]</div>
+
+            <!-- Social Bar -->
+            <div class="ad-container ad-socialbar" id="ad-socialbar">
+                <div class="ad-label">Social Bar</div>
+                <div class="ad-placeholder" id="adcode-socialbar"></div>
+            </div>
+
+            <!-- Smartlink -->
+            <div class="ad-container ad-smartlink" id="ad-smartlink">
+                <div class="ad-label">Smartlink</div>
+                <div class="ad-placeholder" id="adcode-smartlink"></div>
+            </div>
+
+            <!-- Banner 728x90 -->
+            <div class="ad-container ad-728x90" id="ad-banner728">
+                <div class="ad-label">Banner 728x90</div>
+                <div class="ad-placeholder" id="adcode-banner728"></div>
+            </div>
+
+            <a href="index.html" class="back-btn">← Back to Home</a>
+
+            <header class="header">
+                <h1>Wallpaper Gallery</h1>
+                <p>Click image to preview · Download or Share</p>
+                <div class="badge">Free HD Wallpapers</div>
+            </header>
+
+            <!-- Native Banner -->
+            <div class="ad-container ad-native" id="ad-native">
+                <div class="ad-label">Native Banner</div>
+                <div class="ad-placeholder" id="adcode-native"></div>
+            </div>
+
+            <div class="ad-sidebar-wrapper">
+                <div>
+                    <div class="gallery" id="gallery"></div>
+
+                    <!-- Banner 468x60 -->
+                    <div class="ad-container ad-468x60" id="ad-banner468" style="margin-top: 1rem;">
+                        <div class="ad-label">Banner 468x60</div>
+                        <div class="ad-placeholder" id="adcode-banner468"></div>
+                    </div>
+
+                    <!-- Banner 320x50 -->
+                    <div class="ad-container ad-320x50" id="ad-banner320">
+                        <div class="ad-label">Banner 320x50</div>
+                        <div class="ad-placeholder" id="adcode-banner320"></div>
+                    </div>
                 </div>
 
-                <!-- ===== BANNER 160x300 ===== -->
-                <div class="ad-container ad-160x300" style="margin-top: 0.8rem;">
-                    <div class="ad-label">Banner 160x300</div>
-                    <div class="ad-placeholder">[ 160x300_1 ]</div>
-                </div>
+                <div>
+                    <!-- Banner 160x600 -->
+                    <div class="ad-container ad-160x600" id="ad-banner160x600">
+                        <div class="ad-label">Banner 160x600</div>
+                        <div class="ad-placeholder" id="adcode-banner160x600"></div>
+                    </div>
 
-                <!-- ===== BANNER 300x250 ===== -->
-                <div class="ad-container ad-300x250" style="margin-top: 0.8rem;">
-                    <div class="ad-label">Banner 300x250</div>
-                    <div class="ad-placeholder" style="min-height: 180px;">[ 300x250_1 ]</div>
+                    <!-- Banner 160x300 -->
+                    <div class="ad-container ad-160x300" id="ad-banner160x300" style="margin-top: 0.8rem;">
+                        <div class="ad-label">Banner 160x300</div>
+                        <div class="ad-placeholder" id="adcode-banner160x300"></div>
+                    </div>
+
+                    <!-- Banner 300x250 -->
+                    <div class="ad-container ad-300x250" id="ad-banner300" style="margin-top: 0.8rem;">
+                        <div class="ad-label">Banner 300x250</div>
+                        <div class="ad-placeholder" id="adcode-banner300"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- ===== BANNER 468x60 ===== -->
-        <div class="ad-container ad-468x60" style="margin-top: 1rem;">
-            <div class="ad-label">Banner 468x60</div>
-            <div class="ad-placeholder">[ 468x60_1 ]</div>
-        </div>
-
-        <!-- ===== BANNER 320x50 ===== -->
-        <div class="ad-container ad-320x50">
-            <div class="ad-label">Banner 320x50</div>
-            <div class="ad-placeholder">[ 320x50_1 ]</div>
+            <!-- Banner 468x60 Bottom -->
+            <div class="ad-container ad-468x60" id="ad-banner468-bottom" style="margin-top: 1rem;">
+                <div class="ad-label">Banner 468x60</div>
+                <div class="ad-placeholder" id="adcode-banner468-bottom"></div>
+            </div>
         </div>
 
         <div class="footer-text">
@@ -636,15 +638,76 @@
             <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
             Download
         </a>
-        <div class="modal-ad">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-content">[ Native Banner ]</div>
-        </div>
     </div>
 
     <div class="toast" id="toast"></div>
 
     <script>
+        // ============================================================
+        // LOAD ADS FROM LOCALSTORAGE
+        // ============================================================
+        const ADS_STORAGE_KEY = 'ads_codes';
+
+        function loadAds() {
+            try {
+                const data = localStorage.getItem(ADS_STORAGE_KEY);
+                if (data) {
+                    return JSON.parse(data);
+                }
+                return [];
+            } catch {
+                return [];
+            }
+        }
+
+        function renderAds() {
+            const ads = loadAds();
+
+            // Map ad IDs to container IDs
+            const adMap = {
+                'popunder': 'adcode-popunder',
+                'socialbar': 'adcode-socialbar',
+                'smartlink': 'adcode-smartlink',
+                'banner728': 'adcode-banner728',
+                'native': 'adcode-native',
+                'banner468': 'adcode-banner468',
+                'banner320': 'adcode-banner320',
+                'banner160x600': 'adcode-banner160x600',
+                'banner160x300': 'adcode-banner160x300',
+                'banner300': 'adcode-banner300'
+            };
+
+            ads.forEach(ad => {
+                const containerId = adMap[ad.id];
+                if (!containerId) return;
+
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                // Show ad if active and has code
+                if (ad.active && ad.code && ad.code.trim() !== '') {
+                    // Insert the ad code
+                    container.innerHTML = ad.code;
+                } else {
+                    // Show placeholder
+                    const label = ad.name || ad.id;
+                    container.innerHTML = `<span style="color: rgba(255,255,255,0.08); font-size: 0.7rem;">[ ${label} - Inactive ]</span>`;
+                }
+            });
+
+            // Also handle Native Banner in modal
+            const nativeAd = ads.find(a => a.id === 'native');
+            const modalAd = document.querySelector('.modal-ad .ad-content');
+            if (modalAd && nativeAd && nativeAd.active && nativeAd.code) {
+                modalAd.innerHTML = nativeAd.code;
+            } else if (modalAd) {
+                modalAd.textContent = '[ Native Banner ]';
+            }
+        }
+
+        // ============================================================
+        // WALLPAPER DATA
+        // ============================================================
         const STORAGE_KEY = 'wallpaper_data';
 
         function loadWallpapers() {
@@ -669,7 +732,10 @@
                 gallery.innerHTML = `
                     <div class="empty-state">
                         <h3>No wallpapers available</h3>
-                        <p>Check back later</p>
+                        <p>Check back later for new wallpapers</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.7rem; color: rgba(255,255,255,0.1);">
+                            Admin can upload via <a href="adminpanel.html" style="color: #7abfff; text-decoration: none;">Admin Panel</a>
+                        </p>
                     </div>
                 `;
                 return;
@@ -704,12 +770,16 @@
 
                 // Insert ad after every 4 wallpapers
                 if ((index + 1) % 4 === 0 && index < wallpapers.length - 1) {
+                    // Try to get native ad from localStorage
+                    const ads = loadAds();
+                    const nativeAd = ads.find(a => a.id === 'native');
+                    const adContent = nativeAd && nativeAd.active && nativeAd.code ? nativeAd.code : '📢 Sponsored';
+
                     html += `
                         <div class="ad-grid-item">
                             <div class="ad-label">Advertisement</div>
                             <div style="font-size: 1.5rem; opacity: 0.15; margin: 0.3rem 0;">📢</div>
-                            <div class="ad-content">[ Native Banner ]</div>
-                            <div style="color: rgba(255,255,255,0.03); font-size: 0.6rem;">Sponsored</div>
+                            <div class="ad-content">${adContent}</div>
                         </div>
                     `;
                 }
@@ -794,7 +864,33 @@
             }, 2500);
         }
 
+        // ============================================================
+        // INIT - Render Gallery & Ads
+        // ============================================================
         renderGallery();
+        renderAds();
+
+        // Re-render ads when page loads (for any dynamic content)
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAds();
+        });
+
+        // ============================================================
+        // NOTES FOR ADMIN:
+        // ============================================================
+        /*
+        CARA KERJA:
+        1. Admin masukkan kode iklan di Admin Panel (tab "Ad Codes")
+        2. Kode disimpan di localStorage dengan key 'ads_codes'
+        3. Halaman wallpaper membaca kode dari localStorage
+        4. Iklan akan tampil jika status "Active" dan ada kode
+
+        Jika iklan tidak muncul:
+        - Pastikan status "Active" (toggle hijau)
+        - Pastikan ada kode yang dimasukkan
+        - Clear cache browser (Ctrl+Shift+Delete)
+        - Buka di mode incognito untuk test
+        */
     </script>
 </body>
 </html>
