@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wallpaper Gallery</title>
     <style>
-        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -38,6 +37,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .ad-wrap .ad-label {
@@ -54,6 +54,7 @@
             align-items: center;
             justify-content: center;
             min-height: 30px;
+            flex-wrap: wrap;
         }
 
         .ad-wrap .ad-box iframe,
@@ -114,7 +115,6 @@
             margin: 0 auto;
         }
 
-        /* ===== LAYOUT ===== */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -286,6 +286,7 @@
             text-decoration: none;
         }
 
+        /* ===== MODAL ===== */
         .modal {
             display: none;
             position: fixed;
@@ -467,12 +468,10 @@
 
             <!-- ===== MAIN CONTENT ===== -->
             <div>
-
-                <!-- ===== GALLERY ===== -->
                 <div class="gallery" id="gallery"></div>
 
                 <!-- ===== BANNER 468x60 ===== -->
-                <div class="ad-wrap ad-468x60" id="ad-banner468" style="margin-top: 1rem;">
+                <div class="ad-wrap ad-468x60" id="ad-banner468" style="margin-top:1rem;">
                     <div class="ad-label">BANNER 468x60</div>
                     <div class="ad-box" id="adcode-banner468"></div>
                 </div>
@@ -482,12 +481,10 @@
                     <div class="ad-label">BANNER 320x50</div>
                     <div class="ad-box" id="adcode-banner320"></div>
                 </div>
-
             </div>
 
             <!-- ===== SIDEBAR ===== -->
             <div>
-
                 <!-- ===== BANNER 160x600 ===== -->
                 <div class="ad-wrap ad-160x600" id="ad-banner160x600">
                     <div class="ad-label">BANNER 160x600</div>
@@ -495,17 +492,16 @@
                 </div>
 
                 <!-- ===== BANNER 160x300 ===== -->
-                <div class="ad-wrap ad-160x300" id="ad-banner160x300" style="margin-top: 0.8rem;">
+                <div class="ad-wrap ad-160x300" id="ad-banner160x300" style="margin-top:0.8rem;">
                     <div class="ad-label">BANNER 160x300</div>
                     <div class="ad-box" id="adcode-banner160x300"></div>
                 </div>
 
                 <!-- ===== BANNER 300x250 ===== -->
-                <div class="ad-wrap ad-300x250" id="ad-banner300" style="margin-top: 0.8rem;">
+                <div class="ad-wrap ad-300x250" id="ad-banner300" style="margin-top:0.8rem;">
                     <div class="ad-label">BANNER 300x250</div>
                     <div class="ad-box" id="adcode-banner300"></div>
                 </div>
-
             </div>
 
         </div>
@@ -547,7 +543,7 @@
         }
 
         // ================================================================
-        // 2. TAMPILKAN IKLAN
+        // 2. TAMPILKAN IKLAN - EKSEKUSI KODE DENGAN BENAR
         // ================================================================
         function renderAds() {
             const ads = getAds();
@@ -573,19 +569,98 @@
                 const el = document.getElementById(elId);
                 if (!el) return;
 
-                // Jika aktif dan ada kode, tampilkan kodenya
+                // Kosongkan dulu
+                el.innerHTML = '';
+
+                // Jika aktif dan ada kode
                 if (ad.active && ad.code && ad.code.trim() !== '') {
-                    el.innerHTML = ad.code;
+                    try {
+                        // CARA 1: Coba eksekusi sebagai script
+                        const code = ad.code.trim();
+
+                        // Deteksi apakah ini kode script
+                        if (code.includes('<script')) {
+                            // Ekstrak semua script tag
+                            const scriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/gi;
+                            let match;
+                            let scripts = [];
+                            let htmlContent = code;
+
+                            // Cari semua script
+                            while ((match = scriptRegex.exec(code)) !== null) {
+                                scripts.push(match[1]);
+                                // Hapus script tag dari htmlContent
+                                htmlContent = htmlContent.replace(match[0], '');
+                            }
+
+                            // Tampilkan HTML (non-script) dulu
+                            if (htmlContent.trim() !== '') {
+                                el.innerHTML = htmlContent;
+                            }
+
+                            // Eksekusi script
+                            scripts.forEach(scriptCode => {
+                                if (scriptCode.trim() !== '') {
+                                    try {
+                                        // Buat script element baru
+                                        const scriptEl = document.createElement('script');
+                                        scriptEl.textContent = scriptCode;
+                                        document.body.appendChild(scriptEl);
+                                    } catch (e) {
+                                        console.warn('Script error:', e);
+                                    }
+                                }
+                            });
+
+                            // Jika ada script dengan src, buat element script
+                            const srcRegex = /<script[^>]*src=["']([^"']*)["'][^>]*>/gi;
+                            let srcMatch;
+                            while ((srcMatch = srcRegex.exec(code)) !== null) {
+                                const scriptEl = document.createElement('script');
+                                scriptEl.src = srcMatch[1];
+                                document.body.appendChild(scriptEl);
+                            }
+
+                            console.log(`✅ Iklan "${ad.name}" dimuat dengan script`);
+
+                        } else if (code.includes('<iframe') || code.includes('<img') || code.includes('<a') || code
+                            .includes('<div')) {
+                            // CARA 2: HTML biasa (iframe, img, link)
+                            el.innerHTML = code;
+                            console.log(`✅ Iklan "${ad.name}" dimuat sebagai HTML`);
+
+                        } else if (code.includes('document.write') || code.includes('innerHTML')) {
+                            // CARA 3: Kode JavaScript murni
+                            try {
+                                const scriptEl = document.createElement('script');
+                                scriptEl.textContent = code;
+                                document.body.appendChild(scriptEl);
+                                console.log(`✅ Iklan "${ad.name}" dimuat sebagai JavaScript`);
+                            } catch (e) {
+                                console.warn('JS error:', e);
+                                el.innerHTML = `<span style="color:rgba(255,255,255,0.2);font-size:0.7rem;">[ ${ad.name} - Error ]</span>`;
+                            }
+
+                        } else {
+                            // CARA 4: Teks biasa
+                            el.innerHTML = code;
+                            console.log(`✅ Iklan "${ad.name}" dimuat sebagai teks`);
+                        }
+
+                    } catch (e) {
+                        console.error(`❌ Gagal load iklan "${ad.name}":`, e);
+                        el.innerHTML =
+                            `<span style="color:rgba(255,100,100,0.3);font-size:0.7rem;">[ ${ad.name} - Error ]</span>`;
+                    }
                 } else {
-                    // Tampilkan placeholder
+                    // Tampilkan placeholder jika tidak aktif
                     const label = ad.name || ad.id;
                     el.innerHTML =
                         `<span style="color:rgba(255,255,255,0.08);font-size:0.7rem;">[ ${label} - Tidak Aktif ]</span>`;
                 }
             });
 
-            // Debug: tampilkan di console
-            console.log('✅ Iklan dimuat:', ads.length, 'unit');
+            console.log('📢 Iklan dimuat:', ads.filter(a => a.active && a.code).length, 'unit aktif');
         }
 
         // ================================================================
@@ -646,23 +721,6 @@
                         </div>
                     </div>
                 `;
-
-                // Sisipkan iklan setiap 4 wallpaper
-                if ((i + 1) % 4 === 0 && i < wallpapers.length - 1) {
-                    const ads = getAds();
-                    const nativeAd = ads.find(a => a.id === 'native');
-                    let adContent = '📢 Sponsored';
-                    if (nativeAd && nativeAd.active && nativeAd.code && nativeAd.code.trim() !== '') {
-                        adContent = nativeAd.code;
-                    }
-                    html += `
-                        <div class="ad-wrap" style="min-height:120px;border:1px solid rgba(255,255,255,0.04);border-radius:1rem;padding:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                            <div class="ad-label">ADVERTISEMENT</div>
-                            <div style="font-size:1.5rem;opacity:0.1;margin:0.3rem 0;">📢</div>
-                            <div style="font-size:0.7rem;color:rgba(255,255,255,0.05);">${adContent}</div>
-                        </div>
-                    `;
-                }
             });
 
             gallery.innerHTML = html;
