@@ -24,19 +24,20 @@
             margin: 0 auto;
         }
 
+        /* ===== ADS OTOMATIS ===== */
         .ad-wrap {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 0.8rem;
             padding: 0.5rem;
-            margin: 0.6rem 0;
+            margin: 0.6rem auto;
             text-align: center;
-            min-height: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            width: 100%;
         }
 
         .ad-wrap .ad-label {
@@ -56,16 +57,23 @@
             flex-wrap: wrap;
         }
 
-        .ad-728x90 { min-height: 90px; max-width: 728px; margin: 0 auto; }
-        .ad-468x60 { min-height: 60px; max-width: 468px; margin: 0 auto; }
-        .ad-320x50 { min-height: 50px; max-width: 320px; margin: 0 auto; }
-        .ad-300x250 { min-height: 250px; max-width: 300px; margin: 0 auto; }
-        .ad-160x600 { min-height: 400px; max-width: 160px; margin: 0 auto; }
-        .ad-160x300 { min-height: 200px; max-width: 160px; margin: 0 auto; }
-        .ad-native { min-height: 80px; max-width: 600px; margin: 0 auto; }
-        .ad-smartlink { min-height: 50px; max-width: 400px; margin: 0 auto; }
-        .ad-popunder { min-height: 30px; max-width: 300px; margin: 0 auto; }
-        .ad-socialbar { min-height: 30px; max-width: 500px; margin: 0 auto; }
+        .ad-wrap .ad-box iframe,
+        .ad-wrap .ad-box img,
+        .ad-wrap .ad-box script {
+            max-width: 100%;
+        }
+
+        /* ===== UKURAN OTOMATIS ===== */
+        .ad-size-728x90 { min-height: 90px; max-width: 728px; }
+        .ad-size-468x60 { min-height: 60px; max-width: 468px; }
+        .ad-size-320x50 { min-height: 50px; max-width: 320px; }
+        .ad-size-300x250 { min-height: 250px; max-width: 300px; }
+        .ad-size-160x600 { min-height: 400px; max-width: 160px; }
+        .ad-size-160x300 { min-height: 200px; max-width: 160px; }
+        .ad-size-native { min-height: 80px; max-width: 600px; }
+        .ad-size-smartlink { min-height: 50px; max-width: 400px; }
+        .ad-size-popunder { min-height: 30px; max-width: 300px; }
+        .ad-size-socialbar { min-height: 30px; max-width: 500px; }
 
         .back-btn {
             display: inline-flex;
@@ -323,10 +331,14 @@
             .sidebar-wrap { grid-template-columns: 1fr; }
             .header h1 { font-size: 2rem; }
             .gallery { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .ad-size-160x600 { min-height: 120px; max-width: 100%; }
+            .ad-size-160x300 { min-height: 120px; max-width: 100%; }
         }
         @media (max-width: 480px) {
             .gallery { grid-template-columns: 1fr; }
             .header h1 { font-size: 1.6rem; }
+            .ad-size-728x90 { min-height: 60px; }
+            .ad-size-300x250 { min-height: 180px; }
         }
     </style>
 </head>
@@ -334,7 +346,7 @@
 
     <div class="container">
 
-        <!-- ===== IKLAN ATAS ===== -->
+        <!-- ===== IKLAN ATAS (AUTO) ===== -->
         <div id="adsTop"></div>
 
         <a href="index.html" class="back-btn">← Back to Home</a>
@@ -378,41 +390,46 @@
 
     <script>
         // ================================================================
-        // AMBIL DATA IKLAN
+        // DATA IKLAN - OTOMATIS SEMUA UKURAN
         // ================================================================
         const ADS_KEY = 'ads_codes';
 
         function getAds() {
             try {
                 const raw = localStorage.getItem(ADS_KEY);
-                console.log('📦 Raw localStorage data:', raw);
                 if (!raw) return [];
-                const parsed = JSON.parse(raw);
-                console.log('📦 Parsed ads:', parsed);
-                return parsed;
-            } catch (e) {
-                console.error('❌ Error parsing ads:', e);
+                return JSON.parse(raw);
+            } catch {
                 return [];
             }
         }
 
         // ================================================================
+        // KONFIGURASI IKLAN OTOMATIS
+        // ================================================================
+        const adConfig = {
+            popunder: { label: 'POPUNDER', size: 'ad-size-popunder', position: 'top' },
+            socialbar: { label: 'SOCIAL BAR', size: 'ad-size-socialbar', position: 'top' },
+            smartlink: { label: 'SMARTLINK', size: 'ad-size-smartlink', position: 'top' },
+            banner728: { label: 'BANNER 728x90', size: 'ad-size-728x90', position: 'top' },
+            native: { label: 'NATIVE BANNER', size: 'ad-size-native', position: 'top' },
+            banner468: { label: 'BANNER 468x60', size: 'ad-size-468x60', position: 'bottom' },
+            banner320: { label: 'BANNER 320x50', size: 'ad-size-320x50', position: 'bottom' },
+            banner160x600: { label: 'BANNER 160x600', size: 'ad-size-160x600', position: 'sidebar' },
+            banner160x300: { label: 'BANNER 160x300', size: 'ad-size-160x300', position: 'sidebar' },
+            banner300: { label: 'BANNER 300x250', size: 'ad-size-300x250', position: 'sidebar' },
+        };
+
+        // ================================================================
         // EKSEKUSI KODE IKLAN
         // ================================================================
         function executeAdCode(code, container) {
-            if (!code || code.trim() === '') {
-                console.warn('⚠️ Kode kosong, skip');
-                return false;
-            }
-
-            console.log('🔧 Execute code:', code.substring(0, 100) + '...');
+            if (!code || code.trim() === '') return false;
 
             try {
-                // CARA 1: Coba sebagai HTML + Script
-                if (code.includes('<script') || code.includes('<iframe') || code.includes('<img') || code.includes('<a') || code
-                    .includes('<div')) {
-
-                    // Ekstrak script tags
+                // Cek apakah ada script
+                if (code.includes('<script')) {
+                    // Ekstrak script
                     const scriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/gi;
                     let match;
                     let scripts = [];
@@ -423,65 +440,59 @@
                         htmlContent = htmlContent.replace(match[0], '');
                     }
 
-                    // Tampilkan HTML
                     if (htmlContent.trim() !== '') {
                         container.innerHTML = htmlContent;
-                        console.log('✅ HTML content inserted');
                     }
 
-                    // Eksekusi script
                     scripts.forEach(scriptCode => {
                         if (scriptCode.trim() !== '') {
                             try {
                                 const scriptEl = document.createElement('script');
                                 scriptEl.textContent = scriptCode;
                                 document.head.appendChild(scriptEl);
-                                console.log('✅ Script executed');
-                            } catch (e) {
-                                console.warn('⚠️ Script error:', e);
-                            }
+                            } catch (e) { /* ignore */ }
                         }
                     });
 
-                    // Cek script dengan src
                     const srcRegex = /<script[^>]*src=["']([^"']*)["'][^>]*>/gi;
                     let srcMatch;
                     while ((srcMatch = srcRegex.exec(code)) !== null) {
                         const scriptEl = document.createElement('script');
                         scriptEl.src = srcMatch[1];
                         document.head.appendChild(scriptEl);
-                        console.log('✅ Script with src loaded:', srcMatch[1]);
                     }
 
                     return true;
                 }
 
-                // CARA 2: JavaScript murni
-                if (code.includes('document.write') || code.includes('innerHTML') || code.includes('window.')) {
+                // HTML biasa
+                if (code.includes('<iframe') || code.includes('<img') || code.includes('<a') || code.includes('<div')) {
+                    container.innerHTML = code;
+                    return true;
+                }
+
+                // JavaScript murni
+                if (code.includes('document.write') || code.includes('innerHTML')) {
                     try {
                         const scriptEl = document.createElement('script');
                         scriptEl.textContent = code;
                         document.head.appendChild(scriptEl);
-                        console.log('✅ JavaScript executed');
                         return true;
-                    } catch (e) {
-                        console.warn('⚠️ JS error:', e);
-                    }
+                    } catch (e) { /* ignore */ }
                 }
 
-                // CARA 3: Teks biasa - tampilkan apa adanya
+                // Teks biasa
                 container.textContent = code;
-                console.log('✅ Displayed as text');
                 return true;
 
             } catch (e) {
-                console.error('❌ Error executing code:', e);
+                console.warn('Error executing ad code:', e);
                 return false;
             }
         }
 
         // ================================================================
-        // RENDER IKLAN
+        // RENDER IKLAN - OTOMATIS SEMUA
         // ================================================================
         function renderAds() {
             const ads = getAds();
@@ -496,83 +507,53 @@
             adsBottom.innerHTML = '';
             adsSidebar.innerHTML = '';
 
-            // Mapping
-            const positionMap = {
-                popunder: 'top',
-                socialbar: 'top',
-                smartlink: 'top',
-                banner728: 'top',
-                native: 'top',
-                banner468: 'bottom',
-                banner320: 'bottom',
-                banner160x600: 'sidebar',
-                banner160x300: 'sidebar',
-                banner300: 'sidebar',
-            };
+            // Filter iklan aktif
+            const activeAds = ads.filter(ad => {
+                const config = adConfig[ad.id];
+                if (!config) return false;
+                return ad.active && ad.code && ad.code.trim() !== '';
+            });
 
-            const labelMap = {
-                popunder: { label: 'POPUNDER', cls: 'ad-popunder' },
-                socialbar: { label: 'SOCIAL BAR', cls: 'ad-socialbar' },
-                smartlink: { label: 'SMARTLINK', cls: 'ad-smartlink' },
-                banner728: { label: 'BANNER 728x90', cls: 'ad-728x90' },
-                native: { label: 'NATIVE BANNER', cls: 'ad-native' },
-                banner468: { label: 'BANNER 468x60', cls: 'ad-468x60' },
-                banner320: { label: 'BANNER 320x50', cls: 'ad-320x50' },
-                banner160x600: { label: 'BANNER 160x600', cls: 'ad-160x600' },
-                banner160x300: { label: 'BANNER 160x300', cls: 'ad-160x300' },
-                banner300: { label: 'BANNER 300x250', cls: 'ad-300x250' },
-            };
+            console.log(`📢 Total iklan aktif: ${activeAds.length}`);
 
-            // Cek semua iklan
-            console.log('📢 Total iklan di localStorage:', ads.length);
+            if (activeAds.length === 0) {
+                // Tidak ada iklan, tampilkan pesan
+                adsTop.innerHTML = `
+                    <div style="text-align:center;padding:0.5rem;color:rgba(255,255,255,0.03);font-size:0.7rem;">
+                        Tidak ada iklan aktif
+                    </div>
+                `;
+                return;
+            }
 
-            let activeCount = 0;
-
-            ads.forEach(ad => {
-                console.log(`🔍 Iklan: ${ad.id} | Active: ${ad.active} | Code: ${ad.code ? ad.code.substring(0, 30) + '...' : 'TIDAK ADA'}`);
-
-                const pos = positionMap[ad.id];
-                const info = labelMap[ad.id];
-                if (!pos || !info) {
-                    console.warn(`⚠️ Skip ${ad.id}: no mapping`);
-                    return;
-                }
-
-                // Cek aktif dan ada kode
-                if (!ad.active) {
-                    console.log(`⏭️ Skip ${ad.id}: tidak aktif`);
-                    return;
-                }
-
-                if (!ad.code || ad.code.trim() === '') {
-                    console.log(`⏭️ Skip ${ad.id}: kode kosong`);
-                    return;
-                }
-
-                activeCount++;
+            // Buat setiap iklan
+            activeAds.forEach(ad => {
+                const config = adConfig[ad.id];
+                if (!config) return;
 
                 // Buat container
                 const wrap = document.createElement('div');
-                wrap.className = `ad-wrap ${info.cls}`;
+                wrap.className = `ad-wrap ${config.size}`;
 
+                // Label
                 const label = document.createElement('div');
                 label.className = 'ad-label';
-                label.textContent = info.label;
+                label.textContent = config.label;
                 wrap.appendChild(label);
 
+                // Box untuk kode
                 const box = document.createElement('div');
                 box.className = 'ad-box';
                 wrap.appendChild(box);
 
                 // Tentukan posisi
                 let target;
-                if (pos === 'top') target = adsTop;
-                else if (pos === 'bottom') target = adsBottom;
-                else if (pos === 'sidebar') target = adsSidebar;
+                if (config.position === 'top') target = adsTop;
+                else if (config.position === 'bottom') target = adsBottom;
+                else if (config.position === 'sidebar') target = adsSidebar;
 
                 if (target) {
                     target.appendChild(wrap);
-                    console.log(`✅ Iklan ${ad.id} dimuat ke posisi ${pos}`);
                 }
 
                 // Eksekusi kode
@@ -580,17 +561,17 @@
 
                 if (!success) {
                     box.innerHTML =
-                        `<span style="color:rgba(255,100,100,0.3);font-size:0.7rem;">[ ${ad.id} - Error ]</span>`;
+                        `<span style="color:rgba(255,100,100,0.2);font-size:0.6rem;">[ ${ad.id} - error ]</span>`;
                 }
+
+                console.log(`✅ ${config.label} dimuat ke ${config.position}`);
             });
 
-            console.log(`📢 Iklan aktif: ${activeCount} unit`);
-
-            // Jika tidak ada iklan, tampilkan pesan
-            if (activeCount === 0) {
-                adsTop.innerHTML = `
-                    <div style="text-align:center;padding:1rem;color:rgba(255,255,255,0.05);font-size:0.7rem;">
-                        Tidak ada iklan aktif. Buka Admin Panel untuk mengatur.
+            // Jika sidebar kosong, sembunyikan
+            if (adsSidebar.children.length === 0) {
+                adsSidebar.innerHTML = `
+                    <div style="text-align:center;padding:0.5rem;color:rgba(255,255,255,0.02);font-size:0.6rem;">
+                        No sidebar ads
                     </div>
                 `;
             }
@@ -716,9 +697,8 @@
         });
 
         console.log('✅ Halaman siap!');
+        console.log('📢 Sistem iklan otomatis berjalan');
         console.log('🖼️ Jumlah wallpaper:', wallpapers.length);
-        console.log('💡 Buka Console (F12) untuk melihat debug iklan');
-        console.log('💡 Pastikan semua iklan di admin panel statusnya ACTIVE (hijau)');
     </script>
 
 </body>
